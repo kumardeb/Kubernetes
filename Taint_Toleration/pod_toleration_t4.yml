@@ -1,0 +1,16 @@
+# All Tolerate
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-toleration-t4
+  labels:
+    env: prod  
+spec:
+  containers:
+    - name: webservers 
+      image: nginx
+  tolerations:
+     - key: ""
+       operator: "Exists" 
+       effect: "NoSchedule" 
+      # value: "minion1"

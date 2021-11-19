@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-toleration-t1
+  labels:
+    env: prod  
+spec:
+  containers:
+    - name: webservers 
+      image: nginx
+  tolerations:
+     - key: "name"
+      # operator: "Equal"  ---> if absent it will take default value which is operator: "Equal"
+       effect: "NoSchedule"
+       value: "minion1"

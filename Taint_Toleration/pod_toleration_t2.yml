@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-toleration-t2
+  labels:
+    env: prod  
+spec:
+  containers:
+    - name: webservers 
+      image: nginx
+  tolerations:
+     - key: "name"
+       operator: "Equal" 
+       effect: ""  # Applicable for all kind of taint 
+       value: "minion1"
