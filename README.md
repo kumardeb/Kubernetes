@@ -1,1 +1,1 @@
-This is Kubernetes tutorial by Deepak
+This is Kubernetes tutorial by Deepak.
