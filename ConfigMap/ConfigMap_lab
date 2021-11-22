@@ -1,0 +1,1765 @@
+Script started on Tue 16 Nov 2021 06:37:10 AM EST
+
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl  api-resource | grep -i cm[1@s
+configmaps                        [01;31m[Kcm[m[K           v1                                     true         ConfigMap
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# kubectl get cm 
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm [K[K[K[K[K[K[Kcreate cm cm[K[Kmycm1
+configmap/mycm1 created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm1[8Pget cm 
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+mycm1              0      2s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm create cm mycm1[K2 --from-literal=DB='192.168.1.27'
+configmap/mycm2 created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm2 --from-literal=DB='192.168.1.27'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cget cm [K
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+mycm1              0      42s
+mycm2              1      3s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm [K[K[K[K[K[K[Kdescrime[K[Kbe cm mycm1
+Name:         mycm1
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm mycm1[K3
+Error from server (NotFound): configmaps "mycm3" not found
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm mycm3[K2
+Name:         mycm2
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+DB:
+----
+192.168.1.27
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# touch application.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "1" > application.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "1" > application.properties[1P[1@2[C[C[C> application.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "2" >> application.properties[1P[1@3[C[C[C
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "3" >> application.properties[1P[1@4
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cat application.properties
+1
+2
+3
+4
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cat application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8@echo "4" >>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P1" [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Ptouch[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C_.propertiest.propertiesw.propertieso.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# touch application_two.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Pcat application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8@echo "4" >>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C_.propertiest.propertiesw.propertieso.properties[C[1P[1@5
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "5" >> application_two.properties[1P[1@6
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr 
+total 12
+-rw-r--r--. 1 root root    8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root 4096 Nov 16 07:11 ConfigMap_lab
+-rw-r--r--. 1 root root    4 Nov 16 07:12 application_two.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr echo "6" >> application_two.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C5[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Ptouch[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Pcat application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8@echo "4" >>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P1" [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Ptouch[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3Pkubectl describe cm mycm231[10Pget cm create cm mycm2 --from-literal=DB='192.168.1.27'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cget cm [Kcreate cm mycm2 --from-literal=DB='192.168.1.27'[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[1P=[1P=[1P=[1P=[1P=[1P=[1P=f=i=l=e=[C/root/Kubernetes/ConfigMap/*properties[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[Kapplication.properties
+error: failed to create configmap: configmaps "mycm2" already exists
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm2 --from-file=/root/Kubernetes/ConfigMap/application.properties[1P --from-file=/root/Kubernetes/ConfigMap/application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3 --from-file=/root/Kubernetes/ConfigMap/application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+configmap/mycm3 created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm3 --from-file=/root/Kubernetes/ConfigMap/application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [Kecho "6" >> application_two.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C5[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Ptouch[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Pcat application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8@echo "4" >>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P1" [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Ptouch[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3Pkubectl describe cm mycm2[K3
+Name:         mycm3
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+application.properties:
+----
+1
+2
+3
+4
+
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm mycm3create cm mycm3 --from-file=/root/Kubernetes/ConfigMap/application.properties[1Ppplication.properties[C[1Plication.properties[1Plication.properties[1Pication.properties[1Pcation.properties[1Pation.properties[1Ption.properties[1Pion.properties[1Pon.properties[1Pn.properties[1P.properties[1Pproperties[1Properties[1Poperties[1Pperties[1Perties[1Prties[1Pties[1Pies[1Pes[1Ps[K[1P --from-file=/root/Kubernetes/ConfigMap/4 --from-file=/root/Kubernetes/ConfigMap/
+configmap/mycm4 created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm4 --from-file=/root/Kubernetes/ConfigMap/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdescribe cm mycm3[K[K4
+Name:         mycm4
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+ConfigMap_lab:
+----
+Script started on Tue 16 Nov 2021 06:37:10 AM EST
+]0;root@Gru:~/Kubernetes/ConfigMap[?1034h[root@Gru ConfigMap]# kubectl get api-resources | grep -i cm
+error: the server doesn't have a resource type "api-resources"
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get api-resources | grep -i cm[1P
+error: the server doesn't have a resource type "api-resource"
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get api-resource | grep -i cm[1P[1P[1P
+Error: unknown command "api-resource" for "kubectl"
+
+Did you mean this?
+  api-resources
+
+Run 'kubectl --help' for usage.
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl  api-resource | grep -i cm[1@s
+configmaps                        [01;31m[Kcm[m[K           v1                                     true         ConfigMap
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# kubectl get cm 
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm [K[K[K[K[K[K[Kcreate cm cm[K[Kmycm1
+configmap/mycm1 created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm1[8Pget cm 
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+mycm1              0      2s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm create cm mycm1[K2 --from-literal=DB='192.168.1.27'
+configmap/mycm2 created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm2 --from-literal=DB='192.168.1.27'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cget cm [K
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+mycm1              0      42s
+mycm2              1      3s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm [K[K[K[K[K[K[Kdescrime[K[Kbe cm mycm1
+Name:         mycm1
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm mycm1[K3
+Error from server (NotFound): configmaps "mycm3" not found
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm mycm3[K2
+Name:         mycm2
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+DB:
+----
+192.168.1.27
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# touch application.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "1" > application.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "1" > application.properties[1P[1@2[C[C[C> application.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "2" >> application.properties[1P[1@3[C[C[C
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "3" >> application.properties[1P[1@4
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cat application.properties
+1
+2
+3
+4
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cat application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8@echo "4" >>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P1" [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Ptouch[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C_.propertiest.propertiesw.propertieso.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# touch application_two.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Pcat application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8@echo "4" >>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C_.propertiest.propertiesw.propertieso.properties[C[1P[1@5
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "5" >> application_two.properties[1P[1@6
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr 
+total 12
+-rw-r--r--. 1 root root    8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root 4096 Nov 16 07:11 ConfigMap_lab
+-rw-r--r--. 1 root root    4 Nov 16 07:12 application_two.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr echo "6" >> application_two.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C5[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Ptouch[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Pcat application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8@echo "4" >>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P1" [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Ptouch[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3Pkubectl describe cm mycm231[10Pget cm create cm mycm2 --from-literal=DB='192.168.1.27'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cget cm [Kcreate cm mycm2 --from-literal=DB='192.168.1.27'[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[1P=[1P=[1P=[1P=[1P=[1P=[1P=f=i=l=e=[C/root/Kubernetes/ConfigMap/*properties[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[Kapplication.properties
+error: failed to create configmap: configmaps "mycm2" already exists
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm2 --from-file=/root/Kubernetes/ConfigMap/application.properties[1P --from-file=/root/Kubernetes/ConfigMap/application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3 --from-file=/root/Kubernetes/ConfigMap/application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+configmap/mycm3 created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm3 --from-file=/root/Kubernetes/ConfigMap/application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+application.properties:
+----
+1
+2
+3
+4
+
+application_two.properties:
+----
+5
+6
+
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr 
+total 24
+-rw-r--r--. 1 root root     8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root     4 Nov 16 07:12 application_two.properties
+-rw-r--r--. 1 root root 16384 Nov 16 07:19 ConfigMap_lab
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# en[K[Kvi env.sh
+[?1049h[?1h=[1;22r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[22;1H"env.sh" [New File][2;1H[1m[34m~                                                                                                                        [3;1H~                                                                                                                        [4;1H~                                                                                                                        [5;1H~                                                                                                                        [6;1H~                                                                                                                        [7;1H~                                                                                                                        [8;1H~                                                                                                                        [9;1H~                                                                                                                        [10;1H~                                                                                                                        [11;1H~                                                                                                                        [12;1H~                                                                                                                        [13;1H~                                                                                                                        [14;1H~                                                                                                                        [15;1H~                                                                                                                        [16;1H~                                                                                                                        [17;1H~                                                                                                                        [18;1H~                                                                                                                        [19;1H~                                                                                                                        [20;1H~                                                                                                                        [21;1H~                                                                                                                        [1;1H[?12l[?25h[?25l[m[22;1H[1m[37m[41mE348: No string under cursor[1;1H[?12l[?25h[?25l[m[22;1H[1m--[m[1m[37m[41m4[m[1m INSERT --[m[1m[37m[41mi[m[22;13H[K[1;1H[?12l[?25h[?25l#[?12l[?25h[?25l [?12l[?25h[?25lt[?12l[?25h[?25lh[?12l[?25h[?25li[?12l[?25h[?25ls[?12l[?25h[?25l[1;6H[K[1;6H[?12l[?25h[?25l[1;5H[K[1;5H[?12l[?25h[?25l[1;4H[K[1;4H[?12l[?25h[?25l[1;3H[K[1;3H[?12l[?25h[?25lT[?12l[?25h[?25lH[?12l[?25h[?25li[?12l[?25h[?25ls[?12l[?25h[?25l [?12l[?25h[?25li[?12l[?25h[?25l[1;8H[K[1;8H[?12l[?25h[?25l[?12l[?25h[?25l[1;6H[K[1;6H[?12l[?25h[?25l[1;5H[K[1;5H[?12l[?25h[?25l[1;4H[K[1;4H[?12l[?25h[?25lh[?12l[?25h[?25li[?12l[?25h[?25ls[?12l[?25h[?25l [?12l[?25h[?25li[?12l[?25h[?25ls[?12l[?25h[?25l [?12l[?25h[?25le[?12l[?25h[?25lx[?12l[?25h[?25la[?12l[?25h[?25lm[?12l[?25h[?25lp[?12l[?25h[?25ll[?12l[?25h[?25le[?12l[?25h[?25l [?12l[?25h[?25lf[?12l[?25h[?25lo[?12l[?25h[?25lr[?12l[?25h[?25l [?12l[?25h[?25le[?12l[?25h[?25ln[?12l[?25h[?25lv[?12l[?25h[?25l[1;25H[K[1;25H[?12l[?25h[?25l[1;24H[K[1;24H[?12l[?25h[?25l[1;23H[K[1;23H[?12l[?25h[?25lf[?12l[?25h[?25lr[?12l[?25h[?25lo[?12l[?25h[?25lm[?12l[?25h[?25l-[?12l[?25h[?25le[?12l[?25h[?25ln[?12l[?25h[?25lv[?12l[?25h[?25l-[?12l[?25h[?25lf[?12l[?25h[?25li[?12l[?25h[?25ll[?12l[?25h[?25le[?12l[?25h[?25l [?12l[?25h[?25lC[?12l[?25h[?25lo[?12l[?25h[?25ln[?12l[?25h[?25lf[?12l[?25h[?25li[?12l[?25h[?25lg[?12l[?25h[?25lM[?12l[?25h[?25la[?12l[?25h[?25lp[?12l[?25h[?25ls[?12l[?25h[?25l.[?12l[?25h[?25l[2;1H[K[2;1H[?12l[?25h[?25l[3;1H[K[3;1H[?12l[?25h[?25lv[?12l[?25h[?25la[?12l[?25h[?25l[3;2H[K[3;2H[?12l[?25h[?25l[3;1H[K[3;1H[?12l[?25h[?25lV[?12l[?25h[?25la[?12l[?25h[?25lr[?12l[?25h[?25li[?12l[?25h[?25la[?12l[?25h[?25lb[?12l[?25h[?25ll[?12l[?25h[?25le[?12l[?25h[?25l1[?12l[?25h[?25l=[?12l[?25h[?25l1[?12l[?25h[?25l[4;1H[K[4;1H[?12l[?25h[?25lN[?12l[?25h[?25la[?12l[?25h[?25lm[?12l[?25h[?25le[?12l[?25h[?25l=[?12l[?25h[?25lD[?12l[?25h[?25le[?12l[?25h[?25le[?12l[?25h[?25lp[?12l[?25h[?25la[?12l[?25h[?25lk[?12l[?25h[?25l[5;1H[K[5;1H[?12l[?25h[?25lO[?12l[?25h[?25lb[?12l[?25h[?25lj[?12l[?25h[?25le[?12l[?25h[?25lc[?12l[?25h[?25lt[?12l[?25h[?25l=[?12l[?25h[?25lP[?12l[?25h[?25lo[?12l[?25h[?25ld[?12l[?25h[?25l[6;1H[K[6;1H[?12l[?25h[?25lr[?12l[?25h[?25le[?12l[?25h[?25ls[?12l[?25h[?25l[6;3H[K[6;3H[?12l[?25h[?25l[6;2H[K[6;2H[?12l[?25h[?25l[6;1H[K[6;1H[?12l[?25h[?25lr[?12l[?25h[?25le[?12l[?25h[?25ls[?12l[?25h[?25lo[?12l[?25h[?25lu[?12l[?25h[?25lr[?12l[?25h[?25lc[?12l[?25h[?25le[?12l[?25h[?25lesource[6;8H[K[6;1H[?12l[?25h[?25lResourceR[?12l[?25hesource[?25l=[?12l[?25h[?25lC[?12l[?25h[?25lP[?12l[?25h[?25lU[?12l[?25h[?25l[7;1H[K[7;1H[?12l[?25h[22;1H[K[7;1H[?25l[?12l[?25h[?25l[22;1H:[?12l[?25hwq![?25l"env.sh" [New] 7L, 98C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# vi env.sh[1Pls -ltr kubectl describe cm mycm4create cm mycm4 --from-file=/root/Kubernetes/ConfigMap/[1@5[1P --from-file=/root/Kubernetes/ConfigMap/[C[C[C[C[C[C[C[Cefile=/root/Kubernetes/ConfigMap/nfile=/root/Kubernetes/ConfigMap/vfile=/root/Kubernetes/ConfigMap/-file=/root/Kubernetes/ConfigMap/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[root@Gru ConfigMap]# kubectl create cm mycm5 --from-env-file=/root/Kubernetes/ConfigMap/env.sh
+configmap/mycm5 created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# kubectl create cm mycm5 --from-env-file=/root/Kubernetes/ConfigMap/env.sh[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cvi env.sh[K[1Pls -ltr kubectl describe cm mycm4[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kget cm
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+mycm1              0      17m
+mycm2              1      16m
+mycm3              1      10m
+mycm4              3      5m45s
+mycm5              4      25s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cmcreate cm mycm5 --from-env-file=/root/Kubernetes/ConfigMap/env.sh[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cvi env.sh[K[1Pls -ltr kubectl describe cm mycm4[K1
+Name:         mycm1
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm mycm1[K2
+Name:         mycm2
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+DB:
+----
+192.168.1.27
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm mycm21[11Pget cm
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+mycm1              0      18m
+mycm2              1      17m
+mycm3              1      11m
+mycm4              3      6m28s
+mycm5              4      68s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cmdescribe cm mycm2
+Name:         mycm2
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+DB:
+----
+192.168.1.27
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm mycm2[K3
+Name:         mycm3
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+application.properties:
+----
+1
+2
+3
+4
+
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm mycm32[11Pget cmdescribe cm mycm2[11Pget cm
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+mycm1              0      18m
+mycm2              1      17m
+mycm3              1      11m
+mycm4              3      6m48s
+mycm5              4      88s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm4
+error: the server doesn't have a resource type "cm4"
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm4[K
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+mycm1              0      18m
+mycm2              1      18m
+mycm3              1      11m
+mycm4              3      7m
+mycm5              4      100s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm4[Kdescribe cm mycm3[K4
+Name:         mycm4
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+ConfigMap_lab:
+----
+Script started on Tue 16 Nov 2021 06:37:10 AM EST
+]0;root@Gru:~/Kubernetes/ConfigMap[?1034h[root@Gru ConfigMap]# kubectl get api-resources | grep -i cm
+error: the server doesn't have a resource type "api-resources"
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get api-resources | grep -i cm[1P
+error: the server doesn't have a resource type "api-resource"
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get api-resource | grep -i cm[1P[1P[1P
+Error: unknown command "api-resource" for "kubectl"
+
+Did you mean this?
+  api-resources
+
+Run 'kubectl --help' for usage.
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl  api-resource | grep -i cm[1@s
+configmaps                        [01;31m[Kcm[m[K           v1                                     true         ConfigMap
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# kubectl get cm 
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm [K[K[K[K[K[K[Kcreate cm cm[K[Kmycm1
+configmap/mycm1 created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm1[8Pget cm 
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+mycm1              0      2s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm create cm mycm1[K2 --from-literal=DB='192.168.1.27'
+configmap/mycm2 created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm2 --from-literal=DB='192.168.1.27'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cget cm [K
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+mycm1              0      42s
+mycm2              1      3s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm [K[K[K[K[K[K[Kdescrime[K[Kbe cm mycm1
+Name:         mycm1
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm mycm1[K3
+Error from server (NotFound): configmaps "mycm3" not found
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm mycm3[K2
+Name:         mycm2
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+DB:
+----
+192.168.1.27
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# touch application.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "1" > application.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "1" > application.properties[1P[1@2[C[C[C> application.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "2" >> application.properties[1P[1@3[C[C[C
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "3" >> application.properties[1P[1@4
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cat application.properties
+1
+2
+3
+4
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cat application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8@echo "4" >>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P1" [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Ptouch[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C_.propertiest.propertiesw.propertieso.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# touch application_two.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Pcat application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8@echo "4" >>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C_.propertiest.propertiesw.propertieso.properties[C[1P[1@5
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# echo "5" >> application_two.properties[1P[1@6
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr 
+total 12
+-rw-r--r--. 1 root root    8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root 4096 Nov 16 07:11 ConfigMap_lab
+-rw-r--r--. 1 root root    4 Nov 16 07:12 application_two.properties
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr echo "6" >> application_two.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C5[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Ptouch[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Pcat application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8@echo "4" >>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P1" [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Ptouch[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3Pkubectl describe cm mycm231[10Pget cm create cm mycm2 --from-literal=DB='192.168.1.27'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cget cm [Kcreate cm mycm2 --from-literal=DB='192.168.1.27'[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[1P=[1P=[1P=[1P=[1P=[1P=[1P=f=i=l=e=[C/root/Kubernetes/ConfigMap/*properties[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[1Ps[Kapplication.properties
+error: failed to create configmap: configmaps "mycm2" already exists
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm2 --from-file=/root/Kubernetes/ConfigMap/application.properties[1P --from-file=/root/Kubernetes/ConfigMap/application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3 --from-file=/root/Kubernetes/ConfigMap/application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+configmap/mycm3 created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycm3 --from-file=/root/Kubernetes/ConfigMap/application.properties[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+application.properties:
+----
+1
+2
+3
+4
+
+application_two.properties:
+----
+5
+6
+
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm mycm4[11Pget cm
+NAME               DATA   AGE
+kube-root-ca.crt   1      24d
+mycm1              0      19m
+mycm2              1      18m
+mycm3              1      12m
+mycm4              3      7m17s
+mycm5              4      117s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cmdescribe cm mycm4[K5
+Name:         mycm5
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+Name:
+----
+Deepak
+Object:
+----
+Pod
+Resource:
+----
+CPU
+Variable1:
+----
+1
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create [K[root@Gru ConfigMap]# kubectl create cm cmz[Kx --dry-run=client
+configmap/cmx created (dry run)
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm cmx --dry-run=client -o yml
+error: unable to match a printer suitable for the output format "yml", allowed formats are: go-template,go-template-file,json,jsonpath,jsonpath-as-json,jsonpath-file,name,template,templatefile,yaml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm cmx --dry-run=client -o ymlaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: cmx
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm cmx --dry-run=client -o yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: cmx
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm cmx --dry-run=client -o yaml > cm.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# vi cm.yml
+[?1049h[?1h=[1;33r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[33;1H"cm.yml" 5L, 79C[1;1HapiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: cmx
+[1m[34m~                                                                                                                         [7;1H~                                                                                                                         [8;1H~                                                                                                                         [9;1H~                                                                                                                         [10;1H~                                                                                                                         [11;1H~                                                                                                                         [12;1H~                                                                                                                         [13;1H~                                                                                                                         [14;1H~                                                                                                                         [15;1H~                                                                                                                         [16;1H~                                                                                                                         [17;1H~                                                                                                                         [18;1H~                                                                                                                         [19;1H~                                                                                                                         [20;1H~                                                                                                                         [21;1H~                                                                                                                         [22;1H~                                                                                                                         [23;1H~                                                                                                                         [24;1H~                                                                                                                         [25;1H~                                                                                                                         [26;1H~                                                                                                                         [27;1H~                                                                                                                         [28;1H~                                                                                                                         [29;1H~                                                                                                                         [30;1H~                                                                                                                         [31;1H~                                                                                                                         [32;1H~                                                                                                                         [1;1H[?12l[?25h[?25l[m[33;1H[K[33;1H:[?12l[?25hq![?25l[33;1H[K[33;1H[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# vi cm.yml[46@kubectl create cm cmx --dry-run=client -o yaml >[C[C[C[C[C[C[C[K[1Pml[K[13Pdescribe cm mycm5[11Pget cmdescribe cm mycm4[11Pget cm4[Kdescribe cm mycm32[11Pget cmdescribe cm mycm21[11Pget cmcreate cm mycm5 --from-env-file=/root/Kubernetes/ConfigMap/env.sh[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cvi env.sh[K[1Pls -ltr kubectl describe cm mycm4create cm mycm4 --from-file=/root/Kubernetes/ConfigMap/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdescribe cm mycm3[Kcreate cm mycm4 --from-file=/root/Kubernetes/ConfigMap/ --dry-run=client -o yaml[1P[1@x
+apiVersion: v1
+data:
+  ConfigMap_lab: "Script started on Tue 16 Nov 2021 06:37:10 AM EST\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a\e[?1034h[root@Gru
+    ConfigMap]# kubectl get api-resources | grep -i cm\r\nerror: the server doesn't
+    have a resource type \"api-resources\"\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get api-resources | grep -i cm\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\r\nerror:
+    the server doesn't have a resource type \"api-resource\"\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get api-resource | grep -i cm\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\b\e[1P\b\e[1P\r\nError:
+    unknown command \"api-resource\" for \"kubectl\"\r\n\r\nDid you mean this?\r\n\tapi-resources\r\n\r\nRun
+    'kubectl --help' for usage.\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl  api-resource | grep -i cm\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1@s\r\nconfigmaps
+    \                       \e[01;31m\e[Kcm\e[m\e[K           v1                                     true
+    \        ConfigMap\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]#
+    \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\e[K[root@Gru
+    ConfigMap]# \r\e[K[root@Gru ConfigMap]# kubectl get cm \r\nNAME               DATA
+    \  AGE\r\nkube-root-ca.crt   1      24d\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get cm \b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[Kcreate cm
+    cm\b\e[K\b\e[Kmycm1\r\nconfigmap/mycm1 created\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl create cm mycm1\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[8Pget cm \r\nNAME
+    \              DATA   AGE\r\nkube-root-ca.crt   1      24d\r\nmycm1              0
+    \     2s\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    get cm \b\b\b\b\b\b\bcreate cm mycm1\b\e[K2 --from-literal=DB='192.168.1.27'\r\nconfigmap/mycm2
+    created\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    create cm mycm2 --from-literal=DB='192.168.1.27'\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cget
+    cm \e[K\r\nNAME               DATA   AGE\r\nkube-root-ca.crt   1      24d\r\nmycm1
+    \             0      42s\r\nmycm2              1      3s\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get cm \b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[Kdescrime\b\e[K\b\e[Kbe
+    cm mycm1\r\nName:         mycm1\r\nNamespace:    default\r\nLabels:       <none>\r\nAnnotations:
+    \ <none>\r\n\r\nData\r\n====\r\n\r\nBinaryData\r\n====\r\n\r\nEvents:  <none>\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl describe cm mycm1\b\e[K3\r\nError from server (NotFound):
+    configmaps \"mycm3\" not found\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl describe cm mycm3\b\e[K2\r\nName:         mycm2\r\nNamespace:
+    \   default\r\nLabels:       <none>\r\nAnnotations:  <none>\r\n\r\nData\r\n====\r\nDB:\r\n----\r\n192.168.1.27\r\n\r\nBinaryData\r\n====\r\n\r\nEvents:
+    \ <none>\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\e[K[root@Gru
+    ConfigMap]# \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# touch application.properties\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"1\" > application.properties\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"1\" > application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\e[1@2\e[C\e[C\e[C>
+    application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"2\" >> application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\e[1@3\e[C\e[C\e[C\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"3\" >> application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\e[1@4\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# cat
+    application.properties\r\n1\r\n2\r\n3\r\n4\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# cat application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[8@echo
+    \"4\" >>\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b3\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b2\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P1\"
+    \e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[5Ptouch\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\e[C_.properties\b\b\b\b\b\b\b\b\b\b\bt.properties\b\b\b\b\b\b\b\b\b\b\bw.properties\b\b\b\b\b\b\b\b\b\b\bo.properties\b\b\b\b\b\b\b\b\b\b\b\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# touch application_two.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[6Pcat
+    application.properties\b\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[8@echo
+    \"4\" >>\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[C\e[C\e[C\e[C_.properties\b\b\b\b\b\b\b\b\b\b\bt.properties\b\b\b\b\b\b\b\b\b\b\bw.properties\b\b\b\b\b\b\b\b\b\b\bo.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[C\b\e[1P\e[1@5\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"5\" >> application_two.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\e[1@6\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# ls -ltr \r\ntotal 12\r\n-rw-r--r--. 1 root root    8 Nov 16 07:11
+    application.properties\r\n-rw-r--r--. 1 root root 4096 Nov 16 07:11 ConfigMap_lab\r\n-rw-r--r--.
+    1 root root    4 Nov 16 07:12 application_two.properties\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# ls -ltr \b\b\b\b\b\b\b\becho \"6\" >> application_two.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C5\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[6Ptouch\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[6Pcat
+    application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[8@echo
+    \"4\" >>\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b3\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b2\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P1\"
+    \e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[5Ptouch\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[3Pkubectl
+    describe cm mycm2\b3\b1\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[10Pget cm \b\b\b\b\b\b\bcreate
+    cm mycm2 --from-literal=DB='192.168.1.27'\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cget
+    cm \e[K\b\b\b\b\b\b\bcreate cm mycm2 --from-literal=DB='192.168.1.27'\b\e[C\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\bf=\bi=\bl=\be=\b\e[C/root/Kubernetes/ConfigMap/*properties\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\e[Kapplication.properties\r\nerror:
+    failed to create configmap: configmaps \"mycm2\" already exists\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl create cm mycm2 --from-file=/root/Kubernetes/ConfigMap/application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P
+    --from-file=/root/Kubernetes/ConfigMap/application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C3
+    --from-file=/root/Kubernetes/ConfigMap/application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\nconfigmap/mycm3
+    created\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    create cm mycm3 --from-file=/root/Kubernetes/ConfigMap/application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C2\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cls
+    -ltr \e[K\b\b\b\b\b\b\b\becho \"6\" >> application_two.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C5\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[6Ptouch\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[6Pcat
+    application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[8@echo
+    \"4\" >>\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b3\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b2\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P1\"
+    \e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[5Ptouch\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[3Pkubectl
+    describe cm mycm2\b\e[K3\r\nName:         mycm3\r\nNamespace:    default\r\nLabels:
+    \      <none>\r\nAnnotations:  <none>\r\n\r\nData\r\n====\r\napplication.properties:\r\n----\r\n1\r\n2\r\n3\r\n4\r\n\r\n\r\nBinaryData\r\n====\r\n\r\nEvents:
+    \ <none>\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    describe cm mycm3\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bcreate cm mycm3 --from-file=/root/Kubernetes/ConfigMap/application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1Ppplication.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[C\e[1Plication.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1Plication.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1Pication.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1Pcation.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1Pation.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1Ption.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1Pion.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1Pon.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1Pn.properties\b\b\b\b\b\b\b\b\b\b\b\b\e[1P.properties\b\b\b\b\b\b\b\b\b\b\b\e[1Pproperties\b\b\b\b\b\b\b\b\b\b\e[1Properties\b\b\b\b\b\b\b\b\b\e[1Poperties\b\b\b\b\b\b\b\b\e[1Pperties\b\b\b\b\b\b\b\e[1Perties\b\b\b\b\b\b\e[1Prties\b\b\b\b\b\e[1Pties\b\b\b\b\e[1Pies\b\b\b\e[1Pes\b\b\e[1Ps\b\e[K\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P
+    --from-file=/root/Kubernetes/ConfigMap/\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b4
+    --from-file=/root/Kubernetes/ConfigMap/\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\r\nconfigmap/mycm4
+    created\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    create cm mycm4 --from-file=/root/Kubernetes/ConfigMap/\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cdescribe
+    cm mycm3\e[K\b\e[K4\r\nName:         mycm4\r\nNamespace:    default\r\nLabels:
+    \      <none>\r\nAnnotations:  <none>\r\n\r\nData\r\n====\r\nConfigMap_lab:\r\n----\r\nScript
+    started on Tue 16 Nov 2021 06:37:10 AM EST\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a\e[?1034h[root@Gru
+    ConfigMap]# kubectl get api-resources | grep -i cm\r\r\nerror: the server doesn't
+    have a resource type \"api-resources\"\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get api-resources | grep -i cm\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\r\r\nerror:
+    the server doesn't have a resource type \"api-resource\"\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get api-resource | grep -i cm\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\b\e[1P\b\e[1P\r\r\nError:
+    unknown command \"api-resource\" for \"kubectl\"\r\r\n\r\r\nDid you mean this?\r\r\n
+    \ api-resources\r\r\n\r\r\nRun 'kubectl --help' for usage.\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl  api-resource | grep -i cm\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1@s\r\r\nconfigmaps
+    \                       \e[01;31m\e[Kcm\e[m\e[K           v1                                     true
+    \        ConfigMap\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]#
+    \r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\e[K[root@Gru
+    ConfigMap]# \r\e[K[root@Gru ConfigMap]# kubectl get cm \r\r\nNAME               DATA
+    \  AGE\r\r\nkube-root-ca.crt   1      24d\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get cm \b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[Kcreate cm
+    cm\b\e[K\b\e[Kmycm1\r\r\nconfigmap/mycm1 created\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl create cm mycm1\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[8Pget cm \r\r\nNAME
+    \              DATA   AGE\r\r\nkube-root-ca.crt   1      24d\r\r\nmycm1              0
+    \     2s\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    get cm \b\b\b\b\b\b\bcreate cm mycm1\b\e[K2 --from-literal=DB='192.168.1.27'\r\r\nconfigmap/mycm2
+    created\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    create cm mycm2 --from-literal=DB='192.168.1.27'\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cget
+    cm \e[K\r\r\nNAME               DATA   AGE\r\r\nkube-root-ca.crt   1      24d\r\r\nmycm1
+    \             0      42s\r\r\nmycm2              1      3s\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get cm \b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[Kdescrime\b\e[K\b\e[Kbe
+    cm mycm1\r\r\nName:         mycm1\r\r\nNamespace:    default\r\r\nLabels:       <none>\r\r\nAnnotations:
+    \ <none>\r\r\n\r\r\nData\r\r\n====\r\r\n\r\r\nBinaryData\r\r\n====\r\r\n\r\r\nEvents:
+    \ <none>\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    describe cm mycm1\b\e[K3\r\r\nError from server (NotFound): configmaps \"mycm3\"
+    not found\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    describe cm mycm3\b\e[K2\r\r\nName:         mycm2\r\r\nNamespace:    default\r\r\nLabels:
+    \      <none>\r\r\nAnnotations:  <none>\r\r\n\r\r\nData\r\r\n====\r\r\nDB:\r\r\n----\r\r\n192.168.1.27\r\r\n\r\r\nBinaryData\r\r\n====\r\r\n\r\r\nEvents:
+    \ <none>\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\e[K[root@Gru
+    ConfigMap]# \r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]#
+    \r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# touch application.properties\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"1\" > application.properties\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"1\" > application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\e[1@2\e[C\e[C\e[C>
+    application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"2\" >> application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\e[1@3\e[C\e[C\e[C\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"3\" >> application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\e[1@4\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# \r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]#
+    cat application.properties\r\r\n1\r\r\n2\r\r\n3\r\r\n4\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# cat application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[8@echo
+    \"4\" >>\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b3\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b2\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P1\"
+    \e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[5Ptouch\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\e[C_.properties\b\b\b\b\b\b\b\b\b\b\bt.properties\b\b\b\b\b\b\b\b\b\b\bw.properties\b\b\b\b\b\b\b\b\b\b\bo.properties\b\b\b\b\b\b\b\b\b\b\b\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# touch application_two.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[6Pcat
+    application.properties\b\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[8@echo
+    \"4\" >>\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[C\e[C\e[C\e[C_.properties\b\b\b\b\b\b\b\b\b\b\bt.properties\b\b\b\b\b\b\b\b\b\b\bw.properties\b\b\b\b\b\b\b\b\b\b\bo.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[C\b\e[1P\e[1@5\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"5\" >> application_two.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\e[1@6\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# ls -ltr \r\r\ntotal 12\r\r\n-rw-r--r--. 1 root root    8 Nov 16 07:11
+    application.properties\r\r\n-rw-r--r--. 1 root root 4096 Nov 16 07:11 ConfigMap_lab\r\r\n-rw-r--r--.
+    1 root root    4 Nov 16 07:12 application_two.properties\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# ls -ltr \b\b\b\b\b\b\b\becho \"6\" >> application_two.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C5\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[6Ptouch\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[6Pcat
+    application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[8@echo
+    \"4\" >>\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b3\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b2\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P1\"
+    \e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[5Ptouch\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[3Pkubectl
+    describe cm mycm2\b3\b1\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[10Pget cm \b\b\b\b\b\b\bcreate
+    cm mycm2 --from-literal=DB='192.168.1.27'\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cget
+    cm \e[K\b\b\b\b\b\b\bcreate cm mycm2 --from-literal=DB='192.168.1.27'\b\e[C\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\bf=\bi=\bl=\be=\b\e[C/root/Kubernetes/ConfigMap/*properties\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\e[Kapplication.properties\r\r\nerror:
+    failed to create configmap: configmaps \"mycm2\" already exists\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl create cm mycm2 --from-file=/root/Kubernetes/ConfigMap/application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P
+    --from-file=/root/Kubernetes/ConfigMap/application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C3
+    --from-file=/root/Kubernetes/ConfigMap/application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\r\nconfigmap/mycm3
+    created\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    create cm mycm3 --from-file=/root/Kubernetes/ConfigMap/application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C2\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\napplication.properties:\r\n----\r\n1\r\n2\r\n3\r\n4\r\n\r\napplication_two.properties:\r\n----\r\n5\r\n6\r\n\r\n\r\nBinaryData\r\n====\r\n\r\nEvents:
+    \ <none>\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# ls -ltr
+    \r\ntotal 24\r\n-rw-r--r--. 1 root root     8 Nov 16 07:11 application.properties\r\n-rw-r--r--.
+    1 root root     4 Nov 16 07:12 application_two.properties\r\n-rw-r--r--. 1 root
+    root 16384 Nov 16 07:19 ConfigMap_lab\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# en\b\e[K\b\e[K\avi env.sh\r\n\e[?1049h\e[?1h\e=\e[1;22r\e[?12;25h\e[?12l\e[?25h\e[27m\e[m\e[H\e[2J\e[?25l\e[22;1H\"env.sh\"
+    [New File]\e[2;1H\e[1m\e[34m~                                                                                                                        \e[3;1H~
+    \                                                                                                                       \e[4;1H~
+    \                                                                                                                       \e[5;1H~
+    \                                                                                                                       \e[6;1H~
+    \                                                                                                                       \e[7;1H~
+    \                                                                                                                       \e[8;1H~
+    \                                                                                                                       \e[9;1H~
+    \                                                                                                                       \e[10;1H~
+    \                                                                                                                       \e[11;1H~
+    \                                                                                                                       \e[12;1H~
+    \                                                                                                                       \e[13;1H~
+    \                                                                                                                       \e[14;1H~
+    \                                                                                                                       \e[15;1H~
+    \                                                                                                                       \e[16;1H~
+    \                                                                                                                       \e[17;1H~
+    \                                                                                                                       \e[18;1H~
+    \                                                                                                                       \e[19;1H~
+    \                                                                                                                       \e[20;1H~
+    \                                                                                                                       \e[21;1H~
+    \                                                                                                                       \e[1;1H\e[?12l\e[?25h\e[?25l\e[m\e[22;1H\e[1m\e[37m\e[41mE348:
+    No string under cursor\e[1;1H\e[?12l\e[?25h\a\e[?25l\e[m\e[22;1H\e[1m--\e[m\e[1m\e[37m\e[41m4\e[m\b\e[1m
+    INSERT --\e[m\e[1m\e[37m\e[41mi\e[m\e[22;13H\e[K\e[1;1H\e[?12l\e[?25h\e[?25l#\e[?12l\e[?25h\e[?25l
+    \e[?12l\e[?25h\e[?25lt\e[?12l\e[?25h\e[?25lh\e[?12l\e[?25h\e[?25li\e[?12l\e[?25h\e[?25ls\e[?12l\e[?25h\e[?25l\e[1;6H\e[K\e[1;6H\e[?12l\e[?25h\e[?25l\e[1;5H\e[K\e[1;5H\e[?12l\e[?25h\e[?25l\e[1;4H\e[K\e[1;4H\e[?12l\e[?25h\e[?25l\e[1;3H\e[K\e[1;3H\e[?12l\e[?25h\e[?25lT\e[?12l\e[?25h\e[?25lH\e[?12l\e[?25h\e[?25li\e[?12l\e[?25h\e[?25ls\e[?12l\e[?25h\e[?25l
+    \e[?12l\e[?25h\e[?25li\e[?12l\e[?25h\e[?25l\e[1;8H\e[K\e[1;8H\e[?12l\e[?25h\e[?25l\b\e[?12l\e[?25h\e[?25l\e[1;6H\e[K\e[1;6H\e[?12l\e[?25h\e[?25l\e[1;5H\e[K\e[1;5H\e[?12l\e[?25h\e[?25l\e[1;4H\e[K\e[1;4H\e[?12l\e[?25h\e[?25lh\e[?12l\e[?25h\e[?25li\e[?12l\e[?25h\e[?25ls\e[?12l\e[?25h\e[?25l
+    \e[?12l\e[?25h\e[?25li\e[?12l\e[?25h\e[?25ls\e[?12l\e[?25h\e[?25l \e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\e[?25lx\e[?12l\e[?25h\e[?25la\e[?12l\e[?25h\e[?25lm\e[?12l\e[?25h\e[?25lp\e[?12l\e[?25h\e[?25ll\e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\e[?25l
+    \e[?12l\e[?25h\e[?25lf\e[?12l\e[?25h\e[?25lo\e[?12l\e[?25h\e[?25lr\e[?12l\e[?25h\e[?25l
+    \e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\e[?25ln\e[?12l\e[?25h\e[?25lv\e[?12l\e[?25h\e[?25l\e[1;25H\e[K\e[1;25H\e[?12l\e[?25h\e[?25l\e[1;24H\e[K\e[1;24H\e[?12l\e[?25h\e[?25l\e[1;23H\e[K\e[1;23H\e[?12l\e[?25h\e[?25lf\e[?12l\e[?25h\e[?25lr\e[?12l\e[?25h\e[?25lo\e[?12l\e[?25h\e[?25lm\e[?12l\e[?25h\e[?25l-\e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\e[?25ln\e[?12l\e[?25h\e[?25lv\e[?12l\e[?25h\e[?25l-\e[?12l\e[?25h\e[?25lf\e[?12l\e[?25h\e[?25li\e[?12l\e[?25h\e[?25ll\e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\e[?25l
+    \e[?12l\e[?25h\e[?25lC\e[?12l\e[?25h\e[?25lo\e[?12l\e[?25h\e[?25ln\e[?12l\e[?25h\e[?25lf\e[?12l\e[?25h\e[?25li\e[?12l\e[?25h\e[?25lg\e[?12l\e[?25h\e[?25lM\e[?12l\e[?25h\e[?25la\e[?12l\e[?25h\e[?25lp\e[?12l\e[?25h\e[?25ls\e[?12l\e[?25h\e[?25l.\e[?12l\e[?25h\e[?25l\e[2;1H\e[K\e[2;1H\e[?12l\e[?25h\e[?25l\e[3;1H\e[K\e[3;1H\e[?12l\e[?25h\e[?25lv\e[?12l\e[?25h\e[?25la\e[?12l\e[?25h\e[?25l\e[3;2H\e[K\e[3;2H\e[?12l\e[?25h\e[?25l\e[3;1H\e[K\e[3;1H\e[?12l\e[?25h\e[?25lV\e[?12l\e[?25h\e[?25la\e[?12l\e[?25h\e[?25lr\e[?12l\e[?25h\e[?25li\e[?12l\e[?25h\e[?25la\e[?12l\e[?25h\e[?25lb\e[?12l\e[?25h\e[?25ll\e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\e[?25l1\e[?12l\e[?25h\e[?25l=\e[?12l\e[?25h\e[?25l1\e[?12l\e[?25h\e[?25l\e[4;1H\e[K\e[4;1H\e[?12l\e[?25h\e[?25lN\e[?12l\e[?25h\e[?25la\e[?12l\e[?25h\e[?25lm\e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\e[?25l=\e[?12l\e[?25h\e[?25lD\e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\e[?25lp\e[?12l\e[?25h\e[?25la\e[?12l\e[?25h\e[?25lk\e[?12l\e[?25h\e[?25l\e[5;1H\e[K\e[5;1H\e[?12l\e[?25h\e[?25lO\e[?12l\e[?25h\e[?25lb\e[?12l\e[?25h\e[?25lj\e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\e[?25lc\e[?12l\e[?25h\e[?25lt\e[?12l\e[?25h\e[?25l=\e[?12l\e[?25h\e[?25lP\e[?12l\e[?25h\e[?25lo\e[?12l\e[?25h\e[?25ld\e[?12l\e[?25h\e[?25l\e[6;1H\e[K\e[6;1H\e[?12l\e[?25h\e[?25lr\e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\e[?25ls\e[?12l\e[?25h\e[?25l\e[6;3H\e[K\e[6;3H\e[?12l\e[?25h\e[?25l\e[6;2H\e[K\e[6;2H\e[?12l\e[?25h\e[?25l\e[6;1H\e[K\e[6;1H\e[?12l\e[?25h\e[?25lr\e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\e[?25ls\e[?12l\e[?25h\e[?25lo\e[?12l\e[?25h\e[?25lu\e[?12l\e[?25h\e[?25lr\e[?12l\e[?25h\e[?25lc\e[?12l\e[?25h\e[?25le\e[?12l\e[?25h\b\b\b\b\b\b\b\e[?25l\besource\e[6;8H\e[K\e[6;1H\e[?12l\e[?25h\e[?25lResource\rR\e[?12l\e[?25hesource\e[?25l=\e[?12l\e[?25h\e[?25lC\e[?12l\e[?25h\e[?25lP\e[?12l\e[?25h\e[?25lU\e[?12l\e[?25h\e[?25l\e[7;1H\e[K\e[7;1H\e[?12l\e[?25h\e[22;1H\e[K\e[7;1H\e[?25l\e[?12l\e[?25h\e[?25l\e[22;1H:\e[?12l\e[?25hwq!\r\e[?25l\"env.sh\"
+    [New] 7L, 98C written\r\r\r\n\e[?1l\e>\e[?12l\e[?25h\e[?1049l\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# vi env.sh\b\b\b\b\b\b\b\b\b\e[1Pls -ltr \b\b\b\b\b\b\b\bkubectl describe
+    cm mycm4\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bcreate cm mycm4 --from-file=/root/Kubernetes/ConfigMap/\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1@5\e[1P
+    --from-file=/root/Kubernetes/ConfigMap/\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cefile=/root/Kubernetes/ConfigMap/\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bnfile=/root/Kubernetes/ConfigMap/\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bvfile=/root/Kubernetes/ConfigMap/\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b-file=/root/Kubernetes/ConfigMap/\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\a\a\a\a\a\a\a\a\r\e[K[root@Gru
+    ConfigMap]# kubectl create cm mycm5 --from-env-file=/root/Kubernetes/ConfigMap/env.sh\r\nconfigmap/mycm5
+    created\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\e[K[root@Gru
+    ConfigMap]# kubectl create cm mycm5 --from-env-file=/root/Kubernetes/ConfigMap/env.sh\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cvi
+    env.sh\e[K\b\b\b\b\b\b\b\b\b\e[1Pls -ltr \b\b\b\b\b\b\b\bkubectl describe cm mycm4\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[Kget
+    cm\r\nNAME               DATA   AGE\r\nkube-root-ca.crt   1      24d\r\nmycm1
+    \             0      17m\r\nmycm2              1      16m\r\nmycm3              1
+    \     10m\r\nmycm4              3      5m45s\r\nmycm5              4      25s\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get cm\b\b\b\b\b\bcreate cm mycm5 --from-env-file=/root/Kubernetes/ConfigMap/env.sh\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cvi
+    env.sh\e[K\b\b\b\b\b\b\b\b\b\e[1Pls -ltr \b\b\b\b\b\b\b\bkubectl describe cm mycm4\b\e[K1\r\nName:
+    \        mycm1\r\nNamespace:    default\r\nLabels:       <none>\r\nAnnotations:
+    \ <none>\r\n\r\nData\r\n====\r\n\r\nBinaryData\r\n====\r\n\r\nEvents:  <none>\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl describe cm mycm1\b\e[K2\r\nName:         mycm2\r\nNamespace:
+    \   default\r\nLabels:       <none>\r\nAnnotations:  <none>\r\n\r\nData\r\n====\r\nDB:\r\n----\r\n192.168.1.27\r\n\r\nBinaryData\r\n====\r\n\r\nEvents:
+    \ <none>\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    describe cm mycm2\b1\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[11Pget cm\r\nNAME               DATA
+    \  AGE\r\nkube-root-ca.crt   1      24d\r\nmycm1              0      18m\r\nmycm2
+    \             1      17m\r\nmycm3              1      11m\r\nmycm4              3
+    \     6m28s\r\nmycm5              4      68s\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get cm\b\b\b\b\b\bdescribe cm mycm2\r\nName:         mycm2\r\nNamespace:
+    \   default\r\nLabels:       <none>\r\nAnnotations:  <none>\r\n\r\nData\r\n====\r\nDB:\r\n----\r\n192.168.1.27\r\n\r\nBinaryData\r\n====\r\n\r\nEvents:
+    \ <none>\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    describe cm mycm2\b\e[K3\r\nName:         mycm3\r\nNamespace:    default\r\nLabels:
+    \      <none>\r\nAnnotations:  <none>\r\n\r\nData\r\n====\r\napplication.properties:\r\n----\r\n1\r\n2\r\n3\r\n4\r\n\r\n\r\nBinaryData\r\n====\r\n\r\nEvents:
+    \ <none>\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    describe cm mycm3\b2\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[11Pget cm\b\b\b\b\b\bdescribe
+    cm mycm2\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[11Pget cm\r\nNAME               DATA
+    \  AGE\r\nkube-root-ca.crt   1      24d\r\nmycm1              0      18m\r\nmycm2
+    \             1      17m\r\nmycm3              1      11m\r\nmycm4              3
+    \     6m48s\r\nmycm5              4      88s\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get cm4\r\nerror: the server doesn't have a resource type
+    \"cm4\"\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    get cm4\b\e[K\r\nNAME               DATA   AGE\r\nkube-root-ca.crt   1      24d\r\nmycm1
+    \             0      18m\r\nmycm2              1      18m\r\nmycm3              1
+    \     11m\r\nmycm4              3      7m\r\nmycm5              4      100s\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get cm4\b\e[K\b\b\b\b\b\bdescribe cm mycm3\b\e[K4\r\nName:
+    \        mycm4\r\nNamespace:    default\r\nLabels:       <none>\r\nAnnotations:
+    \ <none>\r\n\r\nData\r\n====\r\nConfigMap_lab:\r\n----\r\nScript started on Tue
+    16 Nov 2021 06:37:10 AM EST\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a\e[?1034h[root@Gru
+    ConfigMap]# kubectl get api-resources | grep -i cm\r\r\nerror: the server doesn't
+    have a resource type \"api-resources\"\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get api-resources | grep -i cm\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\r\r\nerror:
+    the server doesn't have a resource type \"api-resource\"\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get api-resource | grep -i cm\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\b\e[1P\b\e[1P\r\r\nError:
+    unknown command \"api-resource\" for \"kubectl\"\r\r\n\r\r\nDid you mean this?\r\r\n
+    \ api-resources\r\r\n\r\r\nRun 'kubectl --help' for usage.\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl  api-resource | grep -i cm\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1@s\r\r\nconfigmaps
+    \                       \e[01;31m\e[Kcm\e[m\e[K           v1                                     true
+    \        ConfigMap\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]#
+    \r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\e[K[root@Gru
+    ConfigMap]# \r\e[K[root@Gru ConfigMap]# kubectl get cm \r\r\nNAME               DATA
+    \  AGE\r\r\nkube-root-ca.crt   1      24d\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get cm \b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[Kcreate cm
+    cm\b\e[K\b\e[Kmycm1\r\r\nconfigmap/mycm1 created\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl create cm mycm1\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[8Pget cm \r\r\nNAME
+    \              DATA   AGE\r\r\nkube-root-ca.crt   1      24d\r\r\nmycm1              0
+    \     2s\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    get cm \b\b\b\b\b\b\bcreate cm mycm1\b\e[K2 --from-literal=DB='192.168.1.27'\r\r\nconfigmap/mycm2
+    created\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    create cm mycm2 --from-literal=DB='192.168.1.27'\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cget
+    cm \e[K\r\r\nNAME               DATA   AGE\r\r\nkube-root-ca.crt   1      24d\r\r\nmycm1
+    \             0      42s\r\r\nmycm2              1      3s\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get cm \b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[Kdescrime\b\e[K\b\e[Kbe
+    cm mycm1\r\r\nName:         mycm1\r\r\nNamespace:    default\r\r\nLabels:       <none>\r\r\nAnnotations:
+    \ <none>\r\r\n\r\r\nData\r\r\n====\r\r\n\r\r\nBinaryData\r\r\n====\r\r\n\r\r\nEvents:
+    \ <none>\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    describe cm mycm1\b\e[K3\r\r\nError from server (NotFound): configmaps \"mycm3\"
+    not found\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    describe cm mycm3\b\e[K2\r\r\nName:         mycm2\r\r\nNamespace:    default\r\r\nLabels:
+    \      <none>\r\r\nAnnotations:  <none>\r\r\n\r\r\nData\r\r\n====\r\r\nDB:\r\r\n----\r\r\n192.168.1.27\r\r\n\r\r\nBinaryData\r\r\n====\r\r\n\r\r\nEvents:
+    \ <none>\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\e[K[root@Gru
+    ConfigMap]# \r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]#
+    \r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# touch application.properties\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"1\" > application.properties\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"1\" > application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\e[1@2\e[C\e[C\e[C>
+    application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"2\" >> application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\e[1@3\e[C\e[C\e[C\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"3\" >> application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\e[1@4\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# \r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]#
+    cat application.properties\r\r\n1\r\r\n2\r\r\n3\r\r\n4\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# cat application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[8@echo
+    \"4\" >>\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b3\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b2\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P1\"
+    \e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[5Ptouch\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\e[C_.properties\b\b\b\b\b\b\b\b\b\b\bt.properties\b\b\b\b\b\b\b\b\b\b\bw.properties\b\b\b\b\b\b\b\b\b\b\bo.properties\b\b\b\b\b\b\b\b\b\b\b\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# touch application_two.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[6Pcat
+    application.properties\b\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[8@echo
+    \"4\" >>\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[C\e[C\e[C\e[C_.properties\b\b\b\b\b\b\b\b\b\b\bt.properties\b\b\b\b\b\b\b\b\b\b\bw.properties\b\b\b\b\b\b\b\b\b\b\bo.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[C\b\e[1P\e[1@5\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# echo \"5\" >> application_two.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P\e[1@6\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# ls -ltr \r\r\ntotal 12\r\r\n-rw-r--r--. 1 root root    8 Nov 16 07:11
+    application.properties\r\r\n-rw-r--r--. 1 root root 4096 Nov 16 07:11 ConfigMap_lab\r\r\n-rw-r--r--.
+    1 root root    4 Nov 16 07:12 application_two.properties\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# ls -ltr \b\b\b\b\b\b\b\becho \"6\" >> application_two.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C5\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[6Ptouch\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[6Pcat
+    application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[8@echo
+    \"4\" >>\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b3\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b2\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P1\"
+    \e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[5Ptouch\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[3Pkubectl
+    describe cm mycm2\b3\b1\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[10Pget cm \b\b\b\b\b\b\bcreate
+    cm mycm2 --from-literal=DB='192.168.1.27'\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cget
+    cm \e[K\b\b\b\b\b\b\bcreate cm mycm2 --from-literal=DB='192.168.1.27'\b\e[C\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\e[K\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\b\b\e[1P=\bf=\bi=\bl=\be=\b\e[C/root/Kubernetes/ConfigMap/*properties\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\b\e[1Ps\b\e[Kapplication.properties\r\r\nerror:
+    failed to create configmap: configmaps \"mycm2\" already exists\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl create cm mycm2 --from-file=/root/Kubernetes/ConfigMap/application.properties\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[1P
+    --from-file=/root/Kubernetes/ConfigMap/application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C3
+    --from-file=/root/Kubernetes/ConfigMap/application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\r\nconfigmap/mycm3
+    created\r\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    create cm mycm3 --from-file=/root/Kubernetes/ConfigMap/application.properties\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C2\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\r\napplication.properties:\r\n----\r\n1\r\n2\r\n3\r\n4\r\n\r\napplication_two.properties:\r\n----\r\n5\r\n6\r\n\r\n\r\nBinaryData\r\n====\r\n\r\nEvents:
+    \ <none>\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# kubectl
+    describe cm mycm4\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[11Pget cm\r\nNAME               DATA
+    \  AGE\r\nkube-root-ca.crt   1      24d\r\nmycm1              0      19m\r\nmycm2
+    \             1      18m\r\nmycm3              1      12m\r\nmycm4              3
+    \     7m17s\r\nmycm5              4      117s\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl get cm\b\b\b\b\b\bdescribe cm mycm4\b\e[K5\r\nName:         mycm5\r\nNamespace:
+    \   default\r\nLabels:       <none>\r\nAnnotations:  <none>\r\n\r\nData\r\n====\r\nName:\r\n----\r\nDeepak\r\nObject:\r\n----\r\nPod\r\nResource:\r\n----\r\nCPU\r\nVariable1:\r\n----\r\n1\r\n\r\nBinaryData\r\n====\r\n\r\nEvents:
+    \ <none>\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl create \r\e[K[root@Gru ConfigMap]# kubectl create cm cmz\b\e[Kx
+    --dry-run=client\r\nconfigmap/cmx created (dry run)\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl create cm cmx --dry-run=client -o yml\r\nerror: unable to
+    match a printer suitable for the output format \"yml\", allowed formats are: go-template,go-template-file,json,jsonpath,jsonpath-as-json,jsonpath-file,name,template,templatefile,yaml\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl create cm cmx --dry-run=client -o yml\b\baml\b\b\r\napiVersion:
+    v1\r\nkind: ConfigMap\r\nmetadata:\r\n  creationTimestamp: null\r\n  name: cmx\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl create cm cmx --dry-run=client -o yaml\r\napiVersion: v1\r\nkind:
+    ConfigMap\r\nmetadata:\r\n  creationTimestamp: null\r\n  name: cmx\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru ConfigMap]# \r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# kubectl create cm cmx --dry-run=client -o yaml > cm.yml\r\n\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# vi cm.yml\r\n\e[?1049h\e[?1h\e=\e[1;33r\e[?12;25h\e[?12l\e[?25h\e[27m\e[m\e[H\e[2J\e[?25l\e[33;1H\"cm.yml\"
+    5L, 79C\e[1;1HapiVersion: v1\r\nkind: ConfigMap\r\nmetadata:\r\n  creationTimestamp:
+    null\r\n  name: cmx\r\n\e[1m\e[34m~                                                                                                                         \e[7;1H~
+    \                                                                                                                        \e[8;1H~
+    \                                                                                                                        \e[9;1H~
+    \                                                                                                                        \e[10;1H~
+    \                                                                                                                        \e[11;1H~
+    \                                                                                                                        \e[12;1H~
+    \                                                                                                                        \e[13;1H~
+    \                                                                                                                        \e[14;1H~
+    \                                                                                                                        \e[15;1H~
+    \                                                                                                                        \e[16;1H~
+    \                                                                                                                        \e[17;1H~
+    \                                                                                                                        \e[18;1H~
+    \                                                                                                                        \e[19;1H~
+    \                                                                                                                        \e[20;1H~
+    \                                                                                                                        \e[21;1H~
+    \                                                                                                                        \e[22;1H~
+    \                                                                                                                        \e[23;1H~
+    \                                                                                                                        \e[24;1H~
+    \                                                                                                                        \e[25;1H~
+    \                                                                                                                        \e[26;1H~
+    \                                                                                                                        \e[27;1H~
+    \                                                                                                                        \e[28;1H~
+    \                                                                                                                        \e[29;1H~
+    \                                                                                                                        \e[30;1H~
+    \                                                                                                                        \e[31;1H~
+    \                                                                                                                        \e[32;1H~
+    \                                                                                                                        \e[1;1H\e[?12l\e[?25h\a\e[?25l\e[m\e[33;1H\e[K\e[33;1H:\e[?12l\e[?25hq!\r\e[?25l\e[33;1H\e[K\e[33;1H\e[?1l\e>\e[?12l\e[?25h\e[?1049l\e]0;root@Gru:~/Kubernetes/ConfigMap\a[root@Gru
+    ConfigMap]# vi cm.yml\b\b\b\b\b\b\b\b\b\e[46@kubectl create cm cmx --dry-run=client
+    -o yaml >\e[C\e[C\e[C\e[C\e[C\e[C\e[C\b\b\b\b\b\b\b\b\b\e[K\b\b\b\e[1Pml\b\b\b\b\b\b\b\e[K\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[13Pdescribe
+    cm mycm5\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[11Pget cm\b\b\b\b\b\bdescribe cm
+    mycm4\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[11Pget cm4\b\e[K\b\b\b\b\b\bdescribe
+    cm mycm3\b2\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[11Pget cm\b\b\b\b\b\bdescribe
+    cm mycm2\b1\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\e[11Pget cm\b\b\b\b\b\bcreate cm
+    mycm5 --from-env-file=/root/Kubernetes/ConfigMap/env.sh\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cvi
+    env.sh\e[K\b\b\b\b\b\b\b\b\b\e[1Pls -ltr \b\b\b\b\b\b\b\bkubectl describe cm mycm4\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bcreate
+    cm mycm4 --from-file=/root/Kubernetes/ConfigMap/\r\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[C\e[Cdescribe
+    cm mycm3\e[K\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bcreate cm mycm4 --from-file=/root/Kubernetes/C"
+  application.properties: |
+    1
+    2
+    3
+    4
+  application_two.properties: |
+    5
+    6
+  cm.yml: |
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      creationTimestamp: null
+      name: cmx
+  env.sh: |+
+    # This is example for from-env-file ConfigMaps.
+
+    Variable1=1
+    Name=Deepak
+    Object=Pod
+    Resource=CPU
+
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: mycmx
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycmx --from-file=/root/Kubernetes/ConfigMap/ --dry-run=client -o yaml[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1@D[1@B[1@-[1P[1@=[1@'[1@h[1@j[1@d[1@s[1@h[1@f[1@j[1@h[1@j[1@s[1@d[1@f[1@'[1P[1@x[1@x
+error: error reading hjdshfjhjsdf: no such file or directory
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycmxx --from-file=DB='hjdshfjhjsdf' --dry-run=client -o yaml[1P[1P[1P[1P[1@l[1@i[1@t[1@e[1@r[1@a[1@l
+apiVersion: v1
+data:
+  DB: hjdshfjhjsdf
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: mycmxx
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm mycmxx --from-literal=DB='hjdshfjhjsdf' --dry-run=client -o yaml[3Pfile[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@literal[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C >[1P[1P[1P[1P[1P[1P[1@c[1@m[1@-[1@f[1@r[1@o[1@m[1@-[1@l[1@i[1@t[1@e[1@r[1@a[1@l[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1@2[1@7[1@.[1@0[1@3[1@.[1@2[1@0[1@1[1@8[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C cm-litr[Ker al.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cat[K[K[Kvi cm-literal.yml
+[?1049h[?1h=[1;33r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[33;1H"cm-literal.yml" 7L, 114C[1;1HapiVersion: v1
+data:
+  DB: 27.03.2018
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: cm-from-literal
+[1m[34m~                                                                                                                         [9;1H~                                                                                                                         [10;1H~                                                                                                                         [11;1H~                                                                                                                         [12;1H~                                                                                                                         [13;1H~                                                                                                                         [14;1H~                                                                                                                         [15;1H~                                                                                                                         [16;1H~                                                                                                                         [17;1H~                                                                                                                         [18;1H~                                                                                                                         [19;1H~                                                                                                                         [20;1H~                                                                                                                         [21;1H~                                                                                                                         [22;1H~                                                                                                                         [23;1H~                                                                                                                         [24;1H~                                                                                                                         [25;1H~                                                                                                                         [26;1H~                                                                                                                         [27;1H~                                                                                                                         [28;1H~                                                                                                                         [29;1H~                                                                                                                         [30;1H~                                                                                                                         [31;1H~                                                                                                                         [32;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+
+
+[?25l[6;32r[m[32;1H
+[1;33r[32;1H[1m[34m~                                                                                                                         [m[33;1H[K[6;3H[?12l[?25h[5;3H[4;3H[3;3HDB: 27.03.201[?25l[33;1H[1m[37m[41mE78: Unknown mark[3;16H[?12l[?25h[?25l[33;2H20: Mark not set[m [3;16H[?12l[?25h[?25l[33;1H[1m--[m[1m[37m[41m0[m[1m INSERT[m[1m[37m[41m [m[1m --[m[1m[37m[41mt[m[33;13H[K[3;16H[?12l[?25h[4;16H[3;16H8[?25l[4;32r[4;1H[L[1;33r[4;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lk[?12l[?25h[?25le[?12l[?25h[?25ly[?12l[?25h[?25l1[?12l[?25h[?25l:[?12l[?25h[?25l [?12l[?25h[?25l1[?12l[?25h[?25l[5;32r[5;1H[L[1;33r[5;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lk[?12l[?25h[?25le[?12l[?25h[?25ly[?12l[?25h[?25l2[?12l[?25h[?25l:[?12l[?25h[?25l [?12l[?25h[?25l2[?12l[?25h[33;1H[K[5;9H[?25l[?12l[?25h[?25l[33;1H:[?12l[?25hWq![?25l[33;1H[K[5;9H[?12l[?25h[?25l[33;1H:[?12l[?25hwq![?25l"cm-literal.yml" 8L, 108C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls- ltr 
+bash: ls-: command not found
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr 
+total 148
+-rw-r--r--. 1 root root      8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root      4 Nov 16 07:12 application_two.properties
+-rw-r--r--. 1 root root     98 Nov 16 07:23 env.sh
+-rw-r--r--. 1 root root     79 Nov 16 07:34 cm.yml
+-rw-r--r--. 1 root root 106496 Nov 16 07:39 ConfigMap_lab
+-rw-r--r--. 1 root root    108 Nov 16 07:40 cm-literal.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# create[K[K[K[K[K[Kkubectl create -f cm-literal.yml
+Error from server (BadRequest): error when creating "cm-literal.yml": ConfigMap in version "v1" cannot be handled as a ConfigMap: v1.ConfigMap.ObjectMeta: v1.ObjectMeta.TypeMeta: Kind: Data: ReadString: expects " or n, but found 1, error found in #10 byte of ...|","key1":1,"key2":2}|..., bigger context ...|piVersion":"v1","data":{"DB":"27.03.2018","key1":1,"key2":2},"kind":"ConfigMap","metadata":{"name":"|...
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create -f cm-literal.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [K- [C[C[C[Cvi cm-literal.yml
+[?1049h[?1h=[1;33r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[33;1H"cm-literal.yml" 8L, 108C[1;1HapiVersion: v1
+data:
+  DB: 27.03.2018
+  key1: 1
+  key2: 2
+kind: ConfigMap
+metadata:
+  name: cm-from-literal
+[1m[34m~                                                                                                                         [10;1H~                                                                                                                         [11;1H~                                                                                                                         [12;1H~                                                                                                                         [13;1H~                                                                                                                         [14;1H~                                                                                                                         [15;1H~                                                                                                                         [16;1H~                                                                                                                         [17;1H~                                                                                                                         [18;1H~                                                                                                                         [19;1H~                                                                                                                         [20;1H~                                                                                                                         [21;1H~                                                                                                                         [22;1H~                                                                                                                         [23;1H~                                                                                                                         [24;1H~                                                                                                                         [25;1H~                                                                                                                         [26;1H~                                                                                                                         [27;1H~                                                                                                                         [28;1H~                                                                                                                         [29;1H~                                                                                                                         [30;1H~                                                                                                                         [31;1H~                                                                                                                         [32;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+[?25l[4;32r[m[32;1H
+[1;33r[32;1H[1m[34m~                                                                                                                         [m[33;1H[K[4;3H[?12l[?25h[?25l[4;32r[32;1H
+[1;33r[32;1H[1m[34m~                                                                                                                         [4;1H[?12l[?25h[?25l[33;1H[m:[?12l[?25hwq![?25l"cm-literal.yml" 6L, 88C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# vi cm-literal.yml[15@kubectl create -f[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+configmap/cm-from-literal created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm cm-from-literal
+Name:         cm-from-literal
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+DB:
+----
+27.03.2018
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm cm-from-literal[3Pcreate -f cm-literal.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15@kubectl create -f[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [K- [C[C[C[Cvi cm-literal.ymlkubectl create cm cm-from-literal --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literaal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal[1P.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.[1Pyml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.y[1Pml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.ym[1Pl[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cf --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ci --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.ymll[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cl --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ce --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.ym[1Pl[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1@f[1@i[1@le=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1@/[1@r[1@o[1@o[1@t[1@/[1@Kubernetes/ --dry-run=client -o yaml > cm-literal.ymml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cc --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --dry-run=client -o yaml > cm-literal.ym[1Pl[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CC --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[ConfigMap/ --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ca --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cp --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cp --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cl --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ci --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cc --dry-run=client -o yaml[1@ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ca --dry-run=client -o yam[1@l[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ct --dry-run=client -o ya[1@m[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ci --dry-run=client -o y[1@a[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Co --dry-run=client -o [1@y[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cn --dry-run=client -o[1@ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C. --dry-run=client -[1@o[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cproperties --dry-ru[10@n=client -[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# vi cm-literal.yml
+[?1049h[?1h=[1;33r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[33;1H"cm-literal.yml" 11L, 146C[1;1HapiVersion: v1
+data:
+  application.properties: |
+    1
+    2
+    3
+    4
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: cm-from-file
+[1m[34m~                                                                                                                         [13;1H~                                                                                                                         [14;1H~                                                                                                                         [15;1H~                                                                                                                         [16;1H~                                                                                                                         [17;1H~                                                                                                                         [18;1H~                                                                                                                         [19;1H~                                                                                                                         [20;1H~                                                                                                                         [21;1H~                                                                                                                         [22;1H~                                                                                                                         [23;1H~                                                                                                                         [24;1H~                                                                                                                         [25;1H~                                                                                                                         [26;1H~                                                                                                                         [27;1H~                                                                                                                         [28;1H~                                                                                                                         [29;1H~                                                                                                                         [30;1H~                                                                                                                         [31;1H~                                                                                                                         [32;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+[10;1H[?25l[10;32r[m[32;1H
+[1;33r[32;1H[1m[34m~                                                                                                                         [m[33;1H[K[10;3H[?12l[?25h[?25l[33;1H:[?12l[?25hwq![?25l"cm-literal.yml" 10L, 120C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# vi cm-literal.ymlkubectl create cm cm-from-file --from-file=/root/Kubernetes/ConfigMap/application.properties --dry-ruun=client -o yaml > cm-literal.yml[Adescribe cm cm-from-literal[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3Pcreate -f cm-literal.ymldescribe cm cm-from-literalcreate cm cm-from-file --from-file=/root/Kubernetes/ConfigMap/application.properties --dry-ruun=client -o yaml > cm-literal.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.ymlf.ymlr.ymlo.ymlm.yml-.ymlf.ymli.ymll.ymle.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm cm-from-file --from-file=/root/Kubernetes/ConfigMap/application.properties --dry-ruun=client -o yaml > cm-from-file.yml[Avi cm-literal.yml[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ckubectl create cm cm-from-file --from-file=/root/Kubernetes/ConfigMap/application.properties --dry-ruun=client -o yaml > cm-literal.yml[Adescribe cm cm-from-literal[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3Pcreate -f cm-literal.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15@kubectl create -f[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [K- [C[C[C[Cvi cm-literal.ymlkubectl create cm cm-from-literal --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literaal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[18Pmycmxx --from-literal=DB='hjdshfjhjsdf' --dry-run=client -o yaml
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccm-from-literal --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literaal.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create cm cm-from-literal --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literaal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cfile --from-file=/root/Kubernetes/ConfigMap/application.properties --dry-run=client -o yaml > cm-from-file.yml^C
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# create[K[K[K[K[K[Kkubectl create -f cm-from-file.yml
+configmap/cm-from-file created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create -f cm-from-file.yml[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kget cm 
+NAME               DATA   AGE
+cm-from-file       1      14s
+cm-from-literal    1      11m
+kube-root-ca.crt   1      24d
+mycm1              0      44m
+mycm2              1      44m
+mycm3              1      37m
+mycm4              3      33m
+mycm5              4      27m
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm create -f cm-from-file.ymlget cm [Kcm-from-file[1P[1P[1P[1@d[1@e[1@s[1@c[1@r[1@i[1@b[1@e
+Name:         cm-from-file
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+application.properties:
+----
+1
+2
+3
+4
+
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cat cm-from-file.yml 
+apiVersion: v1
+data:
+  application.properties: |
+    1
+    2
+    3
+    4
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: cm-from-file
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cat cm-from-file.yml kubectl describe cm cm-from-fileget cm [Kcreate -f cm-from-file.ymlcm cm-from-literal --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literaal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal[1P.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.[1Pyml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.y[1Pml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.ym[1Pl[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ce --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cn --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.ymll[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cv --from-literal=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Citeral=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cteral=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P[1@e[1@n[1@v[1@-f=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ci=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.ymll[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cl=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ce=DB='27.03.2018' --dry-run=client -o yaml > cm-literal.yml[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CB='27.03.2018' --dry-run=client -o yaml > cm-literal.ym[1Pl[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C='27.03.2018' --dry-run=client -o yaml > cm-literal.yml[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C'27.03.2018' --dry-run=client -o yaml > cm-literal.yml [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1@e[1@n[1@v[1@.[1@s[1@h[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Piteral.yml[1Pteral.yml[1Peral.yml[1Pral.yml[1Pal.yml[1Pl.yml[1P.ymle.ymln.ymlv.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cat cm-env.yml
+apiVersion: v1
+data:
+  Name: Deepak
+  Object: Pod
+  Resource: CPU
+  Variable1: "1"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: cm-from-env
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl ge[K[Kcreate -f cm-env.yml
+configmap/cm-from-env created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create -f cm-env.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[14Pcat[C[C[C[C[C[C[C[C[C[C[C[76@kubectl create cm cm-from-env --from-env-file=env.sh --dry-run=client -o yaml >[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccat cm-from-file.yml [Kkubectl describe cm cm-from-fileget cm [K
+NAME               DATA   AGE
+cm-from-env        4      5s
+cm-from-file       1      5m52s
+cm-from-literal    1      16m
+kube-root-ca.crt   1      24d
+mycm1              0      50m
+mycm2              1      49m
+mycm3              1      43m
+mycm4              3      38m
+mycm5              4      33m
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get cm create -f cm-env.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[14Pcat[C[C[C[C[C[C[C[C[C[C[C[76@kubectl create cm cm-from-env --from-env-file=env.sh --dry-run=client -o yaml >[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccat cm-from-file.yml [Kkubectl describe cm cm-from-file[K[K[K[K[K[K[K[K[K[K[K[Kcm-from-env
+Name:         cm-from-env
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+Name:
+----
+Deepak
+Object:
+----
+Pod
+Resource:
+----
+CPU
+Variable1:
+----
+1
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr 
+total 284
+-rw-r--r--. 1 root root      8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root      4 Nov 16 07:12 application_two.properties
+-rw-r--r--. 1 root root     98 Nov 16 07:23 env.sh
+-rw-r--r--. 1 root root     79 Nov 16 07:34 cm.yml
+-rw-r--r--. 1 root root    146 Nov 16 07:51 cm-from-file.yml
+-rw-r--r--. 1 root root    114 Nov 16 07:52 cm-literal.yml
+-rw-r--r--. 1 root root    155 Nov 16 07:57 cm-env.yml
+-rw-r--r--. 1 root root 139264 Nov 16 07:58 ConfigMap_lab
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr kubectl describe cm cm-from-env
+Name:         cm-from-env
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+Object:
+----
+Pod
+Resource:
+----
+CPU
+Variable1:
+----
+1
+Name:
+----
+Deepak
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# clear
+[3;J[H[2J]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cp ./pod.[K[K[K[K[K[K../pod.yml .
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr
+total 168
+-rw-r--r--. 1 root root      8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root      4 Nov 16 07:12 application_two.properties
+-rw-r--r--. 1 root root     98 Nov 16 07:23 env.sh
+-rw-r--r--. 1 root root     79 Nov 16 07:34 cm.yml
+-rw-r--r--. 1 root root    146 Nov 16 07:51 cm-from-file.yml
+-rw-r--r--. 1 root root    114 Nov 16 07:52 cm-literal.yml
+-rw-r--r--. 1 root root    155 Nov 16 07:57 cm-env.yml
+-rw-r--r--. 1 root root 139264 Nov 16 07:58 ConfigMap_lab
+-rw-r--r--. 1 root root    136 Nov 16 08:08 pod.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# vi pod.yml
+[?1049h[?1h=[1;33r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[33;1H"pod.yml" 10L, 136C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod
+  labels:
+    env: prod
+spec:
+  containers:
+    - name: webservers[10;7Himage: nginx
+[1m[34m~                                                                                                                         [12;1H~                                                                                                                         [13;1H~                                                                                                                         [14;1H~                                                                                                                         [15;1H~                                                                                                                         [16;1H~                                                                                                                         [17;1H~                                                                                                                         [18;1H~                                                                                                                         [19;1H~                                                                                                                         [20;1H~                                                                                                                         [21;1H~                                                                                                                         [22;1H~                                                                                                                         [23;1H~                                                                                                                         [24;1H~                                                                                                                         [25;1H~                                                                                                                         [26;1H~                                                                                                                         [27;1H~                                                                                                                         [28;1H~                                                                                                                         [29;1H~                                                                                                                         [30;1H~                                                                                                                         [31;1H~                                                                                                                         [32;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+[m  name: po[?25l[33;1H[1m-- INSERT --[m[33;13H[K[4;11H[?12l[?25hd[?25l-[?12l[?25h[?25lc[?12l[?25h[?25lm[?12l[?25h[33;1H[K[4;14H[?25l[?12l[?25h[?25l[33;1H:[?12l[?25hwq![?25l"pod.yml" 10L, 139C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create -f pod.yml
+pod/pod-cm created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get pods
+NAME     READY   STATUS              RESTARTS   AGE
+pod      1/1     Running             0          5h23m
+pod-cm   0/1     ContainerCreating   0          8s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get pods
+NAME     READY   STATUS              RESTARTS   AGE
+pod      1/1     Running             0          5h24m
+pod-cm   0/1     ContainerCreating   0          12s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get pods
+NAME     READY   STATUS              RESTARTS   AGE
+pod      1/1     Running             0          5h24m
+pod-cm   0/1     ContainerCreating   0          14s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get pods
+NAME     READY   STATUS              RESTARTS   AGE
+pod      1/1     Running             0          5h24m
+pod-cm   0/1     ContainerCreating   0          17s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get pods
+NAME     READY   STATUS    RESTARTS   AGE
+pod      1/1     Running   0          5h24m
+pod-cm   1/1     Running   0          24s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl exec -it pod-cm --bash
+Error: unknown flag: --bash
+See 'kubectl exec --help' for usage.
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl exec -it pod-cm --bash bash
+Error from server: error dialing backend: dial tcp 192.168.1.36:10250: connect: no route to host
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl exec -it pod-cm -- bash[1Pbash[14Pget pods -o wide
+NAME     READY   STATUS    RESTARTS   AGE     IP          NODE      NOMINATED NODE   READINESS GATES
+pod      1/1     Running   0          5h25m   10.36.0.2   minion2   <none>           <none>
+pod-cm   1/1     Running   0          88s     10.44.0.1   minion1   <none>           <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe pod pod-cm
+Name:         pod-cm
+Namespace:    default
+Priority:     0
+Node:         minion1/192.168.1.36
+Start Time:   Tue, 16 Nov 2021 13:46:24 -0500
+Labels:       env=prod
+Annotations:  kubernetes.io/limit-ranger: LimitRanger plugin set: memory request for container webservers; memory limit for container webservers
+Status:       Running
+IP:           10.44.0.1
+IPs:
+  IP:  10.44.0.1
+Containers:
+  webservers:
+    Container ID:   docker://10bf246120952f3d2fdb7ecef2be5a60a371d0355b9c015443afd1b3ebe25046
+    Image:          nginx
+    Image ID:       docker-pullable://docker.io/nginx@sha256:168a6a2be5c65d4aafa7a78ca98ff8b110fe44c6ca41e7ccb4314ed481e32288
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 16 Nov 2021 13:46:42 -0500
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      memory:     128Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-jsnnn (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-jsnnn:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age        From               Message
+  ----    ------     ----       ----               -------
+  Normal  Scheduled  8m19s      default-scheduler  Successfully assigned default/pod-cm to minion1
+  Normal  Pulling    <invalid>  kubelet            Pulling image "nginx"
+  Normal  Pulled     <invalid>  kubelet            Successfully pulled image "nginx" in 14.84452487s
+  Normal  Created    <invalid>  kubelet            Created container webservers
+  Normal  Started    <invalid>  kubelet            Started container webservers
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# vi pod.yml 
+[?1049h[?1h=[1;22r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[22;1H"pod.yml" 10L, 139C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm
+  labels:
+    env: prod
+spec:
+  containers:
+    - name: webservers[10;7Himage: nginx
+[1m[34m~                                                                                                                        [12;1H~                                                                                                                        [13;1H~                                                                                                                        [14;1H~                                                                                                                        [15;1H~                                                                                                                        [16;1H~                                                                                                                        [17;1H~                                                                                                                        [18;1H~                                                                                                                        [19;1H~                                                                                                                        [20;1H~                                                                                                                        [21;1H~                                                                                                                        [1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+[m      image: ngin[?25l[22;1H[1m-- INSERT --[m[22;13H[K[10;18H[?12l[?25hx[?25l[11;1H[K[11;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25le[?12l[?25h[?25ln[?12l[?25h[?25lv[?12l[?25h[?25l:[?12l[?25h[?25l[12;1H[K[12;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l-[?12l[?25h[?25l [?12l[?25h[?25ln[?12l[?25h[?25la[?12l[?25h[?25lm[?12l[?25h[?25le[?12l[?25h[?25l:[?12l[?25h[?25l [?12l[?25h[?25lA[?12l[?25h[?25lB[?12l[?25h[?25lC[?12l[?25h[?25l[12;18H[K[12;18H[?12l[?25h[?25l[12;17H[K[12;17H[?12l[?25h[?25l[12;16H[K[12;16H[?12l[?25h[?25ln[?12l[?25h[?25le[?12l[?25h[?25l[12;17H[K[12;17H[?12l[?25h[?25l[12;16H[K[12;16H[?12l[?25h[?25ln[?12l[?25h[?25le[?12l[?25h[?25lw[?12l[?25h[?25l-[?12l[?25h[?25lv[?12l[?25h[?25la[?12l[?25h[?25ll[?12l[?25h[?25lu[?12l[?25h[?25le[?12l[?25h[?25l[13;1H[K[13;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lv[?12l[?25h[?25la[?12l[?25h[?25ll[?12l[?25h[?25lu[?12l[?25h[?25le[?12l[?25h[?25lF[?12l[?25h[?25lr[?12l[?25h[?25lo[?12l[?25h[?25lm[?12l[?25h[?25l"[?12l[?25h[?25l[13;19H[K[13;19H[?12l[?25h[?25l:[?12l[?25h[?25l[14;1H[K[14;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lc[?12l[?25h[?25lo[?12l[?25h[?25ln[?12l[?25h[?25l   [?12l[?25h[?25l[?12l[?25h[?25lf[?12l[?25h[?25li[?12l[?25h[?25lg[?12l[?25h[?25lM[?12l[?25h[?25la[?12l[?25h[?25lp[?12l[?25h[?25lK[?12l[?25h[?25le[?12l[?25h[?25ly[?12l[?25h[?25lR[?12l[?25h[?25le[?12l[?25h[?25lf[?12l[?25h[?25l:[?12l[?25h[?25l[15;1H[K[15;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[14;11H[?25l  configMapKeyRef:[14;11H[?12l[?25h[15;11H[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lk[?12l[?25h[?25le[?12l[?25h[?25ly[?12l[?25h[?25l:[?12l[?25h[?25l [?12l[?25h[?25lN[?12l[?25h[?25la[?12l[?25h[?25lm[?12l[?25h[?25le[?12l[?25h[?25l[16;1H[K[16;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25ln[?12l[?25h[?25la[?12l[?25h[?25lm[?12l[?25h[?25le[?12l[?25h[?25l:[?12l[?25h[?25l [?12l[?25h[22;1H[K[16;19H[?25l[?12l[?25h[?25l[22;1H:[?12l[?25hwq![?25l"pod.yml" 16L, 269C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# vi pod.yml kubectl describe pod pod-cm[3Pget pods -o wideexec -it pod-cm -- bash[1Pbash[14Pget podscreate -f pod.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pvi[C[C[C[C[C[C[C[C[3Pls -ltrcp ../pod.yml .lear[Kkubectl describe cm cm-from-env
+Name:         cm-from-env
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+Name:
+----
+Deepak
+Object:
+----
+Pod
+Resource:
+----
+CPU
+Variable1:
+----
+1
+
+BinaryData
+====
+
+Events:  <none>
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe cm cm-from-env[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[20Pvi pod.yml 
+[?1049h[?1h=[1;22r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[22;1H"pod.yml" 16L, 269C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm
+  labels:
+    env: prod
+spec:
+  containers:
+    - name: webservers[10;7Himage: nginx[11;7Henv:[12;8H- name: new-value[13;10HvalueFrom:[14;12HconfigMapKeyRef:[15;14Hkey: Name[16;14Hname:
+[1m[34m~                                                                                                                        [18;1H~                                                                                                                        [19;1H~                                                                                                                        [20;1H~                                                                                                                        [21;1H~                                                                                                                        [1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[m             name:[15;14H[?25l[22;1H[1m-- INSERT --[m[22;13H[K[16;21r[16;1H[L[1;22r[16;1Hm-env[?12l[?25h[22;1H[K[16;5H[?25l[?12l[?25h[?25l[22;1H1 line less; before #1  5 seconds ago[16;21r[21;1H
+[1;22r[21;1H[1m[34m~                                                                                                                        [m[22;1H[K[15;14H[?12l[?25h[16;14Hname:   [15;14H[?25l[22;1H[1m-- INSERT --[16;21r[m[16;1H[L[1;22r[16;1Hm-env[?12l[?25h[22;1H[K[16;5H[?25l[?12l[?25h[?25l[22;1H1 line less; before #2  3 seconds ago[16;21r[21;1H
+[1;22r[21;1H[1m[34m~                                                                                                                        [m[22;1H[K[15;14H[?12l[?25h[16;14Hname: [?25l[22;1H[1m-- INSERT --[16;20H[?12l[?25h[?25l[mcm-from-env[?12l[?25h[22;1H[K[16;30H[?25l[?12l[?25h[?25l[22;1H:[?12l[?25hwq![?25l"pod.yml" 16L, 280C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get [[Kpods
+NAME     READY   STATUS    RESTARTS   AGE
+pod      1/1     Running   0          5h37m
+pod-cm   1/1     Running   0          13m
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get pods[1P pods[1P pods[1P podsd podse podsl podse podst podse pods[C pods[C[C[C[C[C --all
+pod "pod" deleted
+pod "pod-cm" deleted
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl delete  pods --all[10Pget pods[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kkubectl create -f pod.yml
+pod/pod-cm created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create -f pod.ymldelete  pods --all[10Pget pods
+NAME     READY   STATUS    RESTARTS   AGE
+pod-cm   1/1     Running   0          12s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get podscreate -f pod.ymldelete  pods --all[10Pget pods[5Pvi pod.yml kubectl describe cm cm-from-env[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[20Pvi pod.yml kubectl describe pod pod-cm
+Name:         pod-cm
+Namespace:    default
+Priority:     0
+Node:         minion1/192.168.1.36
+Start Time:   Tue, 16 Nov 2021 14:00:19 -0500
+Labels:       env=prod
+Annotations:  kubernetes.io/limit-ranger: LimitRanger plugin set: memory request for container webservers; memory limit for container webservers
+Status:       Running
+IP:           10.44.0.1
+IPs:
+  IP:  10.44.0.1
+Containers:
+  webservers:
+    Container ID:   docker://3f4654cff4866311345c5c4f3675db01c7bb8957569b51424905b8e97b111a73
+    Image:          nginx
+    Image ID:       docker-pullable://docker.io/nginx@sha256:168a6a2be5c65d4aafa7a78ca98ff8b110fe44c6ca41e7ccb4314ed481e32288
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 16 Nov 2021 14:00:23 -0500
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      memory:  128Mi
+    Environment:
+      new-value:  <set to the key 'Name' of config map 'cm-from-env'>  Optional: false
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-dnc75 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-dnc75:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age        From               Message
+  ----    ------     ----       ----               -------
+  Normal  Scheduled  28s        default-scheduler  Successfully assigned default/pod-cm to minion1
+  Normal  Pulling    <invalid>  kubelet            Pulling image "nginx"
+  Normal  Pulled     <invalid>  kubelet            Successfully pulled image "nginx" in 2.679734066s
+  Normal  Created    <invalid>  kubelet            Created container webservers
+  Normal  Started    <invalid>  kubelet            Started container webservers
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# kubectl describe pod pod-cm[1P[1P[1P[1P[1P[1P[1@l[1@e[1@t[1@e
+pod "pod-cm" deleted
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls- ltr [K[K[K[K[K[K[K[Kls -ltr 
+total 188
+-rw-r--r--. 1 root root      8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root      4 Nov 16 07:12 application_two.properties
+-rw-r--r--. 1 root root     98 Nov 16 07:23 env.sh
+-rw-r--r--. 1 root root     79 Nov 16 07:34 cm.yml
+-rw-r--r--. 1 root root    146 Nov 16 07:51 cm-from-file.yml
+-rw-r--r--. 1 root root    114 Nov 16 07:52 cm-literal.yml
+-rw-r--r--. 1 root root    155 Nov 16 07:57 cm-env.yml
+-rw-r--r--. 1 root root    280 Nov 16 08:22 pod.yml
+-rw-r--r--. 1 root root 159744 Nov 16 08:23 ConfigMap_lab
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# mv pod.yml pod.yml_.ymls.ymli.ymln.ymlg.ymll.ymle.yml_.ymlv.ymla.ymll.ymlu.ymle.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cp pod_single_value.yml pod_single_value.yml[1P_value.yml[1P_value.yml[1P_value.yml[1P_value.yml[1P_value.yml[1P_value.ymlm_value.ymlu_value.ymll_value.ymlt_value.ymli_value.ymlp_value.ymll_value.ymle_value.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls- ltr 
+bash: ls-: command not found
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr
+total 228
+-rw-r--r--. 1 root root      8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root      4 Nov 16 07:12 application_two.properties
+-rw-r--r--. 1 root root     98 Nov 16 07:23 env.sh
+-rw-r--r--. 1 root root     79 Nov 16 07:34 cm.yml
+-rw-r--r--. 1 root root    146 Nov 16 07:51 cm-from-file.yml
+-rw-r--r--. 1 root root    114 Nov 16 07:52 cm-literal.yml
+-rw-r--r--. 1 root root    155 Nov 16 07:57 cm-env.yml
+-rw-r--r--. 1 root root    280 Nov 16 08:22 pod_single_value.yml
+-rw-r--r--. 1 root root 163840 Nov 16 08:37 ConfigMap_lab
+-rw-r--r--. 1 root root    280 Nov 16 08:37 pod_multiple_value.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# vi pod_multiple_value.yml
+[?1049h[?1h=[1;33r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[33;1H"pod_multiple_value.yml" 16L, 280C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm
+  labels:
+    env: prod
+spec:
+  containers:
+    - name: webservers[10;7Himage: nginx[11;7Henv:[12;8H- name: new-value[13;10HvalueFrom:[14;12HconfigMapKeyRef:[15;14Hkey: Name[16;14Hname: cm-from-env
+[1m[34m~                                                                                                                         [18;1H~                                                                                                                         [19;1H~                                                                                                                         [20;1H~                                                                                                                         [21;1H~                                                                                                                         [22;1H~                                                                                                                         [23;1H~                                                                                                                         [24;1H~                                                                                                                         [25;1H~                                                                                                                         [26;1H~                                                                                                                         [27;1H~                                                                                                                         [28;1H~                                                                                                                         [29;1H~                                                                                                                         [30;1H~                                                                                                                         [31;1H~                                                                                                                         [32;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+[m      env[?25l[33;1H[1m-- INSERT --[m[33;13H[K[11;10H[?12l[?25h[?25lF:[?12l[?25h[?25lr:[?12l[?25h[?25lo:[?12l[?25h[?25lm:[?12l[?25h[12;14H[13;12H[33;1H[K[13;9H[?25l[?12l[?25h[?25l[13;32r[32;1H
+[1;33r[32;1H[1m[34m~                                                                                                                         [13;12H[?12l[?25h[14;11H[13;11H[?25l[13;32r[m[32;1H
+[1;33r[32;1H[1m[34m~                                                                                                                         [13;14H[?12l[?25h[?25l[13;32r[m[32;1H
+[1;33r[32;1H[1m[34m~                                                                                                                         [13;14H[?12l[?25h[?25l[m name: cm-from-env [13;12H[?12l[?25h[?25lname: cm-from-env [13;12H[?12l[?25h[12;12Hm[?25l[33;1H[1m[37m[41mE35: No previous regular expression[12;10H[?12l[?25h[?25l[m[33;1H[1m--[m[1m[37m[41m5[m[1m INSERT[m[1m[37m[41mr[m[1m --[m[1m[37m[41mi[m[33;13H[K[12;10H[?12l[?25h[?25lcname: new-value[12;11H[?12l[?25h[?25loname: new-value[12;12H[?12l[?25h[?25lnname: new-value[12;13H[?12l[?25h[?25lfname: new-value[12;14H[?12l[?25h[?25liname: new-value[12;15H[?12l[?25h[?25lgname: new-value[12;16H[?12l[?25h[?25lMname: new-value[12;17H[?12l[?25h[?25laname: new-value[12;18H[?12l[?25h[?25lpname: new-value[12;19H[?12l[?25h[?25lrname: new-value[12;20H[?12l[?25h[?25lename: new-value[12;21H[?12l[?25h[?25lfname: new-value[12;22H[?12l[?25h[?25lame: new-value[12;36H[K[12;22H[?12l[?25h[?25lme: new-value[12;35H[K[12;22H[?12l[?25h[?25le: new-value[12;34H[K[12;22H[?12l[?25h[?25l: new-value[12;33H[K[12;22H[?12l[?25h[?25lRref: new-value[12;20H[?12l[?25h[?25lef: new-value[12;33H[K[12;20H[?12l[?25hef: [?25lew-value[12;32H[K[12;24H[?12l[?25h[?25lw-value[12;31H[K[12;24H[?12l[?25h[?25l-value[12;30H[K[12;24H[?12l[?25h[?25lvalue[12;29H[K[12;24H[?12l[?25h[?25lalue[12;28H[K[12;24H[?12l[?25h[?25llue[12;27H[K[12;24H[?12l[?25h[?25lue[12;26H[K[12;24H[?12l[?25h[?25le[12;25H[K[12;24H[?12l[?25h[?25l[12;24H[K[12;24H[?12l[?25h[?25l[11Cname: cm-from-env
+[1m[34m~                                                                                                                         [12;24H[?12l[?25h[m[33;1H[K[12;23H[?25l[?12l[?25h[?25l[33;1H1 more line; before #9  7 seconds ago[12;24Hnew-value[12;35H[K[13;1H           name: cm-from-env   [13;32H[K[12;24H[?12l[?25h[?25lew-value[12;32H[K[12;24H[?12l[?25h[?25lw-value[12;31H[K[12;24H[?12l[?25h[?25l-value[12;30H[K[12;24H[?12l[?25h[?25lvalue[12;29H[K[12;24H[?12l[?25h[?25lalue[12;28H[K[12;24H[?12l[?25h[?25llue[12;27H[K[12;24H[?12l[?25h[?25lue[12;26H[K[12;24H[?12l[?25h[?25le[12;25H[K[12;24H[?12l[?25h[?25l[12;24H[K[12;23H[?12l[?25h[?25l[33;1H[K[33;1H:[?12l[?25hwq![?25l"pod_multiple_value.yml" 13L, 210C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# vi pod_multiple_value.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr[K- ltr cp pod_single_value.yml pod_multiple_value.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pmv pod.yml pod_single_value.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [Kkubectl delete pod pod-cm[2@scrib[C[C[C[C[C[C[C[C[C[C[C[C[11Pget pods
+No resources found in default namespace.
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create -f pod_multiple_value.yml
+pod/pod-cm created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create -f pod_multiple_value.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cget pods[Kvi pod_multiple_value.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr[K- ltr cp pod_single_value.yml pod_multiple_value.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pmv pod.yml pod_single_value.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [Kkubectl delete pod pod-cm[2@scrib[C[C[C[C[C[C[C[C[C[C[C[C
+Name:         pod-cm
+Namespace:    default
+Priority:     0
+Node:         minion1/192.168.1.36
+Start Time:   Tue, 16 Nov 2021 14:16:58 -0500
+Labels:       env=prod
+Annotations:  kubernetes.io/limit-ranger: LimitRanger plugin set: memory request for container webservers; memory limit for container webservers
+Status:       Running
+IP:           10.44.0.1
+IPs:
+  IP:  10.44.0.1
+Containers:
+  webservers:
+    Container ID:   docker://33496d01788d6b37d7b2c94da8a330159e700fcf2ed3bc1641a6a76a77e1940f
+    Image:          nginx
+    Image ID:       docker-pullable://docker.io/nginx@sha256:168a6a2be5c65d4aafa7a78ca98ff8b110fe44c6ca41e7ccb4314ed481e32288
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 16 Nov 2021 14:17:02 -0500
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      memory:  128Mi
+    Environment Variables from:
+      cm-from-env  ConfigMap  Optional: false
+    Environment:   <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-hzxqf (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-hzxqf:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age        From               Message
+  ----    ------     ----       ----               -------
+  Normal  Scheduled  18s        default-scheduler  Successfully assigned default/pod-cm to minion1
+  Normal  Pulling    <invalid>  kubelet            Pulling image "nginx"
+  Normal  Pulled     <invalid>  kubelet            Successfully pulled image "nginx" in 2.692168679s
+  Normal  Created    <invalid>  kubelet            Created container webservers
+  Normal  Started    <invalid>  kubelet            Started container webservers
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# ls- ltr [K[K[K[K[K[K[K[Kls -ltr 
+total 204
+-rw-r--r--. 1 root root      8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root      4 Nov 16 07:12 application_two.properties
+-rw-r--r--. 1 root root     98 Nov 16 07:23 env.sh
+-rw-r--r--. 1 root root     79 Nov 16 07:34 cm.yml
+-rw-r--r--. 1 root root    146 Nov 16 07:51 cm-from-file.yml
+-rw-r--r--. 1 root root    114 Nov 16 07:52 cm-literal.yml
+-rw-r--r--. 1 root root    155 Nov 16 07:57 cm-env.yml
+-rw-r--r--. 1 root root    280 Nov 16 08:22 pod_single_value.yml
+-rw-r--r--. 1 root root    210 Nov 16 08:39 pod_multiple_value.yml
+-rw-r--r--. 1 root root 172032 Nov 16 08:40 ConfigMap_lab
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# vi pod_multiple_value.yml
+[?1049h[?1h=[1;22r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[22;1H"pod_multiple_value.yml" 13L, 210C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm
+  labels:
+    env: prod
+spec:
+  containers:
+    - name: webservers[10;7Himage: nginx[11;7HenvFrom:[12;8H- configMapRef:[13;12Hname: cm-from-env
+[1m[34m~                                                                                                                        [15;1H~                                                                                                                        [16;1H~                                                                                                                        [17;1H~                                                                                                                        [18;1H~                                                                                                                        [19;1H~                                                                                                                        [20;1H~                                                                                                                        [21;1H~                                                                                                                        [1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+[?25l[m[22;1H[1m-- INSERT --[m[22;13H[K[11;1H[?12l[?25h[?25l[12;21r[12;1H[L[1;22r[11;7H[K[12;7HenvFrom:[?12l[?25h[11;1H[10;1H
+[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lv[?12l[?25h[?25lo[?12l[?25h[?25ll[?12l[?25h[?25lu[?12l[?25h[?25lm[?12l[?25h[?25le[?12l[?25h[?25lP[?12l[?25h[?25lu[?12l[?25h[?25ll[?12l[?25h[?25ll[?12l[?25h[?25l[11;16H[K[11;16H[?12l[?25h[?25l[11;15H[K[11;15H[?12l[?25h[?25l[11;14H[K[11;14H[?12l[?25h[?25l[11;13H[K[11;13H[?12l[?25h[?25lM[?12l[?25h[?25lo[?12l[?25h[?25lu[?12l[?25h[?25ln[?12l[?25h[?25lt[?12l[?25h[?25ls[?12l[?25h[?25l:[?12l[?25h[?25l[12;21r[12;1H[L[1;22r[12;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l-[?12l[?25h[?25l [?12l[?25h[?25ln[?12l[?25h[?25la[?12l[?25h[?25lm[?12l[?25h[?25le[?12l[?25h[?25l:[?12l[?25h[?25l [?12l[?25h[?25lt[?12l[?25h[?25le[?12l[?25h[?25ls[?12l[?25h[?25lt[?12l[?25h[?25l1[?12l[?25h[?25l[12;20H[K[12;20H[?12l[?25h[?25l[13;21r[13;1H[L[1;22r[13;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lm[?12l[?25h[?25lo[?12l[?25h[?25lu[?12l[?25h[?25ln[?12l[?25h[?25lt[?12l[?25h[?25lP[?12l[?25h[?25la[?12l[?25h[?25lt[?12l[?25h[?25lh[?12l[?25h[?25l:[?12l[?25h[?25l [?12l[?25h[?25l"[?12l[?25h[?25l/[?12l[?25h[?25lc[?12l[?25h[?25lo[?12l[?25h[?25ln[?12l[?25h[?25lf[?12l[?25h[?25li[?12l[?25h[?25lg[?12l[?25h[?25l"[?12l[?25h[?25l[14;21r[14;1H[L[1;22r[14;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lr[?12l[?25h[?25le[?12l[?25h[?25la[?12l[?25h[?25ld[?12l[?25h[?25lO[?12l[?25h[?25ln[?12l[?25h[?25ll[?12l[?25h[?25ly[?12l[?25h[?25l:[?12l[?25h[?25l [?12l[?25h[?25lt[?12l[?25h[?25lr[?12l[?25h[?25lu[?12l[?25h[?25le[?12l[?25h[15;15H[22;1H[K[15;5H[?25l[?12l[?25h[?25l[22;1H[1m-- INSERT --[15;5H[?12l[?25h[?25l[m#  envFrom:    #[?12l[?25h[?25l envFrom:[15;15H[K[15;6H[?12l[?25h[16;6H[?25l#  - configMapRef:[16;7H[?12l[?25h[17;7H[?25l@     name: cm-from-env[17;8H[?12l[?25h[?25l     name: cm-from-env [17;7H[?12l[?25h[?25l#     name: cm-from-env[17;8H[?12l[?25h[16;8H[?25l#  - configMapRef:     [?12l[?25h
+    [?25l #     name: cm-from-env     [?12l[?25h[?25l#     name: cm-from-env     [?12l[?25h#     name: cm-from-env   [?25l[18;1H[K[18;1H[?12l[?25h[?25l [?12l[?25h[17;2H[16;2H[15;2H[14;2H[13;2H[12;2H[11;2H[10;2H[9;2H[8;2H[7;2H
+   
+
+
+
+
+
+
+
+
+
+ [?25l [?12l[?25h    [?25lv[?12l[?25h[?25lo[?12l[?25h[?25ll[?12l[?25h[?25lu[?12l[?25h[?25lm[?12l[?25h[?25le[?12l[?25h[?25ls[?12l[?25h[?25l:[?12l[?25h[?25l[19;1H[K[19;1H[?12l[?25h[18;1H  [17;3H[16;3H[15;3H[14;3H[13;3H[12;3H[11;3H[10;3H[9;3H
+  
+  
+  
+  
+  
+  
+  
+  
+  
+[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l-[?12l[?25h[?25ln[?12l[?25h[?25la[?12l[?25h[?25lm[?12l[?25h[?25le[?12l[?25h[?25l name[?12l[?25hname[?25l:[?12l[?25h[?25l [?12l[?25h[?25lt[?12l[?25h[?25le[?12l[?25h[?25ls[?12l[?25h[?25lt[?12l[?25h[?25l[20;1H[K[20;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lc[?12l[?25h[?25lo[?12l[?25h[?25ln[?12l[?25h[?25lf[?12l[?25h[?25li[?12l[?25h[?25lg[?12l[?25h[?25lM[?12l[?25h[?25la[?12l[?25h[?25lp[?12l[?25h[?25lR[?12l[?25h[?25le[?12l[?25h[?25lf[?12l[?25h[?25l[20;17H[K[20;17H[?12l[?25h[?25l[20;16H[K[20;16H[?12l[?25h[?25l[20;15H[K[20;15H[?12l[?25h[?25l:[?12l[?25h[?25l[21;1H[K[21;1H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25ln[?12l[?25h[?25la[?12l[?25h[?25lm[?12l[?25h[?25le[?12l[?25h[?25l:[?12l[?25h[?25lcm-from-env[?12l[?25h[?25l cm-from-env[21;15H[?12l[?25h[22;1H[K[21;14H[?25l[?12l[?25h[?25l
+:[?12l[?25hwq![?25l"pod_multiple_value.yml" 21L, 372C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get pods
+NAME     READY   STATUS    RESTARTS   AGE
+pod-cm   1/1     Running   0          11m
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl get pods[1P pods[1P pods[1P podsd podse podsl podse podst podse pods[C[C[C[C[C pod-cm
+pod "pod-cm" deleted
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl delete pods pod-cm[10Pget podsvi pod_multiple_value.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [Kkubectl describe pod pod-cmcreate -f pod_multiple_value.yml^C
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr 
+total 228
+-rw-r--r--. 1 root root      8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root      4 Nov 16 07:12 application_two.properties
+-rw-r--r--. 1 root root     98 Nov 16 07:23 env.sh
+-rw-r--r--. 1 root root     79 Nov 16 07:34 cm.yml
+-rw-r--r--. 1 root root    146 Nov 16 07:51 cm-from-file.yml
+-rw-r--r--. 1 root root    114 Nov 16 07:52 cm-literal.yml
+-rw-r--r--. 1 root root    155 Nov 16 07:57 cm-env.yml
+-rw-r--r--. 1 root root    280 Nov 16 08:22 pod_single_value.yml
+-rw-r--r--. 1 root root 180224 Nov 16 08:50 ConfigMap_lab
+-rw-r--r--. 1 root root    372 Nov 16 08:51 pod_multiple_value.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cp pod_multiple_value.yml pod_multiple_value.yml[C[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.ymli.ymln.ymlj.ymle.ymlc.ymlt.ymli.ymlo.ymln.yml_.ymla.ymls.yml_.ymlf.ymli.ymll.ymle.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# vi pod_multiple_value.yml
+[?1049h[?1h=[1;22r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[22;1H"pod_multiple_value.yml" 21L, 372C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm
+  labels:
+    env: prod
+spec:
+  containers:
+    - name: webservers[10;7Himage: nginx[11;7HvolumeMounts:[12;8H- name: test[13;10HmountPath: "/config"[14;10HreadOnly: true
+    # envFrom:
+    #  - configMapRef:
+    #     name: cm-from-env
+  volumes:
+   - name: test[20;6HconfigMap:[21;9Hname: cm-from-env[1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+[?25l[11;21r[21;1H
+[1;22r[21;1H[1m[34m~                                                                                                                        [m[22;1H[K[11;8H[?12l[?25h[?25l[11;21r[21;1H
+[1;22r[21;1H[1m[34m~                                                                                                                        [11;10H[?12l[?25h[?25l[11;21r[m[21;1H
+[1;22r[21;1H[1m[34m~                                                                                                                        [11;10H[?12l[?25h[?25l[11;21r[m[21;1H
+[1;22r[21;1H[1m[34m~                                                                                                                        [11;5H[?12l[?25h[?25l[m envFrom:[11;14H[K[11;5H[?12l[?25h [?25l[22;1H[1m-- INSERT --[11;5H[?12l[?25h[?25l[m  envFrom:     [?12l[?25h[12;6H[?25l  - configMapRef:     [?12l[?25h[?25l   - configMapRef:     [?12l[?25h[13;6H[?25l     name: cm-from-env     [?12l[?25h[?25l      name: cm-from-env     [?12l[?25h[14;6H[22;1H[K[14;2H[?25l[?12l[?25h[?25l[14;21r[21;1H
+[1;22r[21;1H[1m[34m~                                                                                                                        [14;4H[?12l[?25h[?25l[14;21r[m[21;1H
+[1;22r[21;1H[1m[34m~                                                                                                                        [14;6H[?12l[?25h[?25l[14;21r[m[21;1H
+[1;22r[21;1H[1m[34m~                                                                                                                        [14;9H[?12l[?25h[?25l~                                                                                                                        [13;11H[?12l[?25h[?25l[22;1H[m:[?12l[?25hwq![?25l"pod_multiple_value.yml" 13L, 209C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# sdiff -s pod_injection_as_file.yml pod_multiple_value.yml
+      volumeMounts:					      |	      envFrom:
+       - name: test					      |	       - configMapRef: 
+         mountPath: "/config"				      |	          name: cm-from-env   
+         readOnly: true					      <
+    # envFrom:						      <
+    #  - configMapRef: 					      <
+    #     name: cm-from-env   				      <
+  volumes:						      <
+   - name: test						      <
+     configMap:						      <
+        name: cm-from-env				      <
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# sdiff -s pod_injection_as_file.yml pod_multiple_value.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[32Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccp pod_multiple_value.yml pod_injection_as_file.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [Kkubectl delete pods pod-cm[10Pget podsvi pod_multiple_value.yml^C
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr 
+total 232
+-rw-r--r--. 1 root root      8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root      4 Nov 16 07:12 application_two.properties
+-rw-r--r--. 1 root root     98 Nov 16 07:23 env.sh
+-rw-r--r--. 1 root root     79 Nov 16 07:34 cm.yml
+-rw-r--r--. 1 root root    146 Nov 16 07:51 cm-from-file.yml
+-rw-r--r--. 1 root root    114 Nov 16 07:52 cm-literal.yml
+-rw-r--r--. 1 root root    155 Nov 16 07:57 cm-env.yml
+-rw-r--r--. 1 root root    280 Nov 16 08:22 pod_single_value.yml
+-rw-r--r--. 1 root root    372 Nov 16 08:52 pod_injection_as_file.yml
+-rw-r--r--. 1 root root 184320 Nov 16 08:52 ConfigMap_lab
+-rw-r--r--. 1 root root    209 Nov 16 08:53 pod_multiple_value.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create -f pod_injection_as_file.yml
+pod/pod-cm created
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl create -f pod_injection_as_file.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [Ksdiff -s pod_injection_as_file.yml pod_multiple_value.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[32Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccp pod_multiple_value.yml pod_injection_as_file.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [Kkubectl delete pods pod-cm[10Pget podsvi pod_multiple_value.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [Kkubectl describe pod pod-cm
+Name:         pod-cm
+Namespace:    default
+Priority:     0
+Node:         minion2/192.168.1.37
+Start Time:   Tue, 16 Nov 2021 14:31:02 -0500
+Labels:       env=prod
+Annotations:  kubernetes.io/limit-ranger: LimitRanger plugin set: memory request for container webservers; memory limit for container webservers
+Status:       Pending
+IP:           
+IPs:          <none>
+Containers:
+  webservers:
+    Container ID:   
+    Image:          nginx
+    Image ID:       
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      memory:  256Mi
+    Requests:
+      memory:     128Mi
+    Environment:  <none>
+    Mounts:
+      /config from test (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-h99ps (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  test:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      cm-from-env
+    Optional:  false
+  kube-api-access-h99ps:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age        From               Message
+  ----    ------     ----       ----               -------
+  Normal  Scheduled  6s         default-scheduler  Successfully assigned default/pod-cm to minion2
+  Normal  Pulling    <invalid>  kubelet            Pulling image "nginx"
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# [K[root@Gru ConfigMap]# 
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# kubectl describe pod pod-cmcreate -f pod_injection_as_file.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [Ksdiff -s pod_injection_as_file.yml pod_multiple_value.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[32Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccp pod_multiple_value.yml pod_injection_as_file.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [Kkubectl delete pods pod-cm[10Pget pods
+NAME     READY   STATUS    RESTARTS   AGE
+pod-cm   1/1     Running   0          34s
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr 
+total 232
+-rw-r--r--. 1 root root      8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root      4 Nov 16 07:12 application_two.properties
+-rw-r--r--. 1 root root     98 Nov 16 07:23 env.sh
+-rw-r--r--. 1 root root     79 Nov 16 07:34 cm.yml
+-rw-r--r--. 1 root root    146 Nov 16 07:51 cm-from-file.yml
+-rw-r--r--. 1 root root    114 Nov 16 07:52 cm-literal.yml
+-rw-r--r--. 1 root root    155 Nov 16 07:57 cm-env.yml
+-rw-r--r--. 1 root root    280 Nov 16 08:22 pod_single_value.yml
+-rw-r--r--. 1 root root    372 Nov 16 08:52 pod_injection_as_file.yml
+-rw-r--r--. 1 root root    209 Nov 16 08:53 pod_multiple_value.yml
+-rw-r--r--. 1 root root 188416 Nov 16 08:53 ConfigMap_lab
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# mv pod_single_value.yml pod_single_value.yml[C[C[C[C[C[C[C[C[C[C[C_.ymli.ymln.ymlj.ymle.ymlc.ymlt.ymli.ymlo.ymln.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# mv pod_multiple_value.yml pod_multiple_value.yml_.ymli.ymln.ymlj.ymle.ymlc.ymlt.ymli.ymlo.ymln.yml
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# ls -ltr 
+total 232
+-rw-r--r--. 1 root root      8 Nov 16 07:11 application.properties
+-rw-r--r--. 1 root root      4 Nov 16 07:12 application_two.properties
+-rw-r--r--. 1 root root     98 Nov 16 07:23 env.sh
+-rw-r--r--. 1 root root     79 Nov 16 07:34 cm.yml
+-rw-r--r--. 1 root root    146 Nov 16 07:51 cm-from-file.yml
+-rw-r--r--. 1 root root    114 Nov 16 07:52 cm-literal.yml
+-rw-r--r--. 1 root root    155 Nov 16 07:57 cm-env.yml
+-rw-r--r--. 1 root root    280 Nov 16 08:22 pod_single_value_injection.yml
+-rw-r--r--. 1 root root    372 Nov 16 08:52 pod_injection_as_file.yml
+-rw-r--r--. 1 root root    209 Nov 16 08:53 pod_multiple_value_injection.yml
+-rw-r--r--. 1 root root 192512 Nov 16 08:55 ConfigMap_lab
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# cat pod_injection_as_file.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm
+  labels:
+    env: prod  
+spec:
+  containers:
+    - name: webservers 
+      image: nginx
+      volumeMounts:
+       - name: test
+         mountPath: "/config"
+         readOnly: true
+    # envFrom:
+    #  - configMapRef: 
+    #     name: cm-from-env   
+  volumes:
+   - name: test
+     configMap:
+        name: cm-from-env
+]0;root@Gru:~/Kubernetes/ConfigMap[root@Gru ConfigMap]# exit
+exit
+
+Script done on Tue 16 Nov 2021 09:14:01 AM EST
