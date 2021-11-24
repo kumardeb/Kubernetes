@@ -1,13 +1,11 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod-secret-multiple-values
+  name: mypod
   labels:
     env: prod  
 spec:
   containers:
     - name: webservers 
       image: nginx
-      envFrom:
-       - secretRef: 
-          name: secret-from-env   
+      args: [ "sleep" , "100" ] 

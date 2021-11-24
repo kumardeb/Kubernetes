@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: resource-based 
+spec:
+  hard:
+   pods: 3
+   services: "10"
+

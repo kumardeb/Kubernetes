@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-node-affinity-error
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: name
+            operator: In
+            values:
+            - minuion1
+            
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: name
+            operator: In
+            values:
+            - minion2
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent

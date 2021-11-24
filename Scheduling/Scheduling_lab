@@ -1,0 +1,775 @@
+Script started on Tue 16 Nov 2021 07:17:00 PM EST
+]0;root@Gru:~/Kubernetes/Scheduling[?1034h[root@Gru Scheduling]# 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# [K[root@Gru Scheduling]# [K[root@Gru Scheduling]# [K[root@Gru Scheduling]# [K[root@Gru Scheduling]# [K[root@Gru Scheduling]# [K[root@Gru Scheduling]# [K[root@Gru Scheduling]# kubectl get nodes
+NAME      STATUS   ROLES                  AGE   VERSION
+gru       Ready    control-plane,master   24d   v1.22.2
+minion1   Ready    <none>                 24d   v1.22.2
+minion2   Ready    <none>                 24d   v1.22.2
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl get nodes --show-labels
+NAME      STATUS   ROLES                  AGE   VERSION   LABELS
+gru       Ready    control-plane,master   24d   v1.22.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=gru,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node-role.kubernetes.io/master=,node.kubernetes.io/exclude-from-external-load-balancers=
+minion1   Ready    <none>                 24d   v1.22.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=minion1,kubernetes.io/os=linux
+minion2   Ready    <none>                 24d   v1.22.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=minion2,kubernetes.io/os=linux
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl label node name=gru[K[K[Kminion1[Cs name=minion1[C name=minion1m name=minion1i name=minion1n name=minion1i name=minion1o name=minion1n name=minion11 name=minion1
+node/minion1 labeled
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl label nodes minion1 name=minion1[9Pget nodes --show-labels
+NAME      STATUS   ROLES                  AGE   VERSION   LABELS
+gru       Ready    control-plane,master   24d   v1.22.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=gru,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node-role.kubernetes.io/master=,node.kubernetes.io/exclude-from-external-load-balancers=
+minion1   Ready    <none>                 24d   v1.22.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=minion1,kubernetes.io/os=linux,name=minion1
+minion2   Ready    <none>                 24d   v1.22.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=minion2,kubernetes.io/os=linux
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# [K[root@Gru Scheduling]# 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl get nodes --show-labels
+NAME      STATUS   ROLES                  AGE   VERSION   LABELS
+gru       Ready    control-plane,master   24d   v1.22.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=gru,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node-role.kubernetes.io/master=,node.kubernetes.io/exclude-from-external-load-balancers=
+minion1   Ready    <none>                 24d   v1.22.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=minion1,kubernetes.io/os=linux,name=minion1
+minion2   Ready    <none>                 24d   v1.22.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=minion2,kubernetes.io/os=linux
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl get nodes --show-labelslabel nodes minion1 name=minion1[K2[1P name=minion22 name=minion2
+node/minion2 labeled
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl label nodes minion2 name=minion2[9Pget nodes --show-labels
+NAME      STATUS   ROLES                  AGE   VERSION   LABELS
+gru       Ready    control-plane,master   24d   v1.22.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=gru,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node-role.kubernetes.io/master=,node.kubernetes.io/exclude-from-external-load-balancers=
+minion1   Ready    <none>                 24d   v1.22.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=minion1,kubernetes.io/os=linux,name=minion1
+minion2   Ready    <none>                 24d   v1.22.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=minion2,kubernetes.io/os=linux,name=minion2
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# [K[root@Gru Scheduling]# vi pod.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod.yml" [New File][2;1H[1m[34m~                                                                                                                         [3;1H~                                                                                                                         [4;1H~                                                                                                                         [5;1H~                                                                                                                         [6;1H~                                                                                                                         [7;1H~                                                                                                                         [8;1H~                                                                                                                         [9;1H~                                                                                                                         [10;1H~                                                                                                                         [11;1H~                                                                                                                         [12;1H~                                                                                                                         [13;1H~                                                                                                                         [14;1H~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h[?25l[m[16;1H[1m-- INSERT --[m[16;13H[K[1;1H[?12l[?25h[?25lapiVersion: v1
+kind: Pod[2;10H[K[3;1Hmetadata:[3;10H[K[4;1H  name: pod-from-node-selector[4;31H[K[5;1H  labels:[5;10H[K[6;1H    env: test[6;14H[K[7;1Hspec:[7;6H[K[8;1H  containers:[8;14H[K[9;1H  - name: nginx[9;16H[K[10;1H    image: nginx[10;17H[K[11;1H    imagePullPolicy: IfNotPresent[11;34H[K[12;1H  nodeSelector:[12;16H[K[13;1H    name: minion1[13;18H[K[13;18H[?12l[?25h[16;1H[K[13;17H[?25l[?12l[?25h[?25l
+
+
+:[?12l[?25hwq![?25l"pod.yml" [New] 13L, 211C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubecrl[K[Ktl get [K[K[K[Kcreate -f pod.yml
+pod/pod-from-node-selector created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pvi[C[C[C[C[C[C[C[C
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod.yml" 13L, 211C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-from-node-selector
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    name: minion1
+[1m[34m~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+[m  name: pod-from-node-selecto[?25l[16;1H[1m-- INSERT --[m[16;13H[K[4;30H[?12l[?25hr[?25l1[?12l[?25h[?25l[4;31H[K[4;31H[?12l[?25h[?25l-[?12l[?25h[?25l1[?12l[?25h[16;1H[K[4;32H[?25l[?12l[?25h[?25l[16;1H:[?12l[?25hwq![?25l"pod.yml" 13L, 213C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod.yml[15@kubectl create -f[C[C[C[C[C[C[C[C
+pod/pod-from-node-selector-1 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pvi[C[C[C[C[C[C[C[C
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod.yml" 13L, 213C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-from-node-selector-1
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    name: minion1
+[1m[34m~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+[m  name: pod-from-node-selector-[?25l[16;1H[K[16;1H:[?12l[?25hq![?25l[16;1H[K[16;1H[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# cp pod.yml pod.yml1.yml[C[C[C[C pod.yml[C2.yml[C[C[C[C pod.yml3.yml
+cp: target ‘pod3.yml’ is not a directory
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls 
+pod.yml  Scheduling_lab
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls -ltr 
+total 12
+-rw-r--r--. 1 root root 8192 Nov 16 19:28 Scheduling_lab
+-rw-r--r--. 1 root root  213 Nov 16 19:28 pod.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# cp pod.yml pod.yml1.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# cp pod.yml pod1.yml[1P.yml2.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# cp pod.yml pod2.yml[1P.yml3.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod1.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod1.yml" 13L, 213C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-from-node-selector-1
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    name: minion1
+[1m[34m~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h[?25l[m[16;1H[K[16;1H:[?12l[?25hq![?25l[16;1H[K[16;1H[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod1.yml[1P.yml2.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod2.yml" 13L, 213C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-from-node-selector-1
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    name: minion1
+[1m[34m~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+[m  name: pod-from-node-selector--[?25l[16;1H[1m-- INSERT --[m[16;13H[K[4;32H[?12l[?25h[?25l21[?12l[?25h[?25l[4;33H[K[4;33H[?12l[?25h[16;1H[K[4;32H[?25l[?12l[?25h[?25l[16;1H:[?12l[?25hwq![?25l"pod2.yml" 13L, 213C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod2.yml1.yml2.yml[1P.yml3.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod3.yml" 13L, 213C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-from-node-selector-1
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    name: minion1
+[1m[34m~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+[m  name: pod-from-node-selector-[?25l[4;32H[K[4;31H[?12l[?25h[?25l[16;1H[1m-- INSERT --[m[16;13H[K[4;31H[?12l[?25h-[?25l3[?12l[?25h[16;1H[K[4;32H[?25l[?12l[?25h[?25l[16;1H:[?12l[?25hwq![?25l"pod3.yml" 13L, 213C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod3.yml2.yml1.ymlcp pod.yml pod3.yml2.yml1.yml[11Pls -ltr [Kcp pod.yml pod1.yml pod2.yml pod3.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cvi pod.yml[K[15@kubectl create -f[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kdelete -f[K[Kpods -all\[K-all
+pod "pod-cm" deleted
+pod "pod-from-node-selector" deleted
+pod "pod-from-node-selector-1" deleted
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl delete pods --all[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[14Pvi pod3.yml2.yml1.yml2.yml3.ymlkubectl delete pods --all[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[14Pvi pod3.yml2.yml1.ymlcp pod.yml pod3.yml2.yml1.yml[11Pls -ltr [Kcp pod.yml pod1.yml pod2.yml pod3.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cvi pod.yml[K[15@kubectl create -f[C[C[C[C[C[C[C[C*.yml
+error: Unexpected args: [pod2.yml pod3.yml pod.yml]
+See 'kubectl create -h' for help and examples
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod*.yml[1P.yml1.yml
+pod/pod-from-node-selector-1 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod1.yml[1P.yml2.yml
+pod/pod-from-node-selector-2 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod2.yml[1P.yml3.yml
+pod/pod-from-node-selector-3 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod3.yml2.yml1.yml*.yml[1Pdelete pods --all[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[14Pvi pod3.yml2.yml1.ymlcp pod.yml pod3.yml[1P.yml3.yml[1P.yml4.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# cp pod.yml pod4.ymlkubectl create -f pod3.yml2.yml1.yml*.yml[1Pdelete pods --all[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[14Pvi pod3.yml[1P.yml4.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod4.yml" 13L, 213C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-from-node-selector-1
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    name: minion1
+[1m[34m~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+[m  name: pod-from-node-selector-[?25l[16;1H[1m-- INSERT --[m[16;13H[K[4;32H[?12l[?25h[?25l41[?12l[?25h[?25l[4;33H[K[4;33H[?12l[?25h[16;1H[K[4;32H[?25l[?12l[?25h[5;9H[6;13H
+spec[8;13H[9;15H[10;16H[11;32H[12;15H[13;17H[?25l
+
+
+[1m-- INSERT --[13;17H[?12l[?25h[?25l[m21[?12l[?25h[?25l[13;18H[K[13;18H[?12l[?25h[16;1H[K[13;17H[?25l[?12l[?25h[?25l
+
+
+:[?12l[?25hwq![?25l"pod4.yml" 13L, 213C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod4.yml[8@cp pod.yml[C[C[C[C[C[C[C[C[Ckubectl create -f pod3.yml[1P.yml4.yml
+pod/pod-from-node-selector-4 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# cp pod4.yml pod4.yml[1P.yml5.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# cp pod4.yml pod5.yml[1P.yml6.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod5.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod5.yml" 13L, 213C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-from-node-selector-4
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    name: minion2
+[1m[34m~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+[m  name: pod-from-node-selector-[?25l[16;1H[1m-- INSERT --[m[16;13H[K[4;32H[?12l[?25h[?25l54[?12l[?25h[?25l[4;33H[K[4;33H[?12l[?25h[16;1H[K[4;32H[?25l[?12l[?25h[?25l[16;1H:[?12l[?25hwq![?25l"pod5.yml" 13L, 213C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod5.yml[1P.yml6.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod6.yml" 13L, 213C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-from-node-selector-4
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    name: minion2
+[1m[34m~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+[m  name: pod-from-node-selector-[?25l[16;1H[1m-- INSERT --[m[16;13H[K[4;32H[?12l[?25h[?25l64[?12l[?25h[?25l[4;33H[K[4;33H[?12l[?25h[16;1H[K[4;32H[?25l[?12l[?25h[?25l[16;1H:[?12l[?25hwq![?25l"pod6.yml" 13L, 213C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod6.yml5.ymlcp pod4.yml pod6.yml5.ymlkubectl create -f pod4.yml[1P.yml5.yml
+pod/pod-from-node-selector-5 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod5.yml[1P.yml6.yml
+pod/pod-from-node-selector-6 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# cp pod5.yml pod5.yml[1P.yml7.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod7.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod7.yml" 13L, 213C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-from-node-selector-5
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    name: minion2
+[1m[34m~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+
+
+[m    name: minio[?25l
+
+
+[1m-- INSERT --[m[16;13H[K[13;16H[?12l[?25h[?25l2[13;17H[K[13;16H[?12l[?25h[16;1H[K[13;15H[?25l[?12l[?25h[?25l
+
+
+:[?12l[?25hwq![?25l"pod7.yml" 13L, 212C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod7.yml[9@cp pod5.yml[C[C[C[C[C[C[C[C[Ckubectl create -f pod6.yml[1P.yml7.yml
+Error from server (AlreadyExists): error when creating "pod7.yml": pods "pod-from-node-selector-5" already exists
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod7.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pvi[C[C[C[C[C[C[C[C[C
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod7.yml" 13L, 212C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-from-node-selector-5
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    name: minio2
+[1m[34m~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+[m  name: pod-from-node-selector-[?25l[16;1H[1m-- INSERT --[m[16;13H[K[4;32H[?12l[?25h[?25l75[?12l[?25h[?25l[4;33H[K[4;33H[?12l[?25h[16;1H[K[4;32H[?25l[?12l[?25h[?25l[16;1H:[?12l[?25hwq![?25l"pod7.yml" 13L, 212C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod7.yml[15@kubectl create -f[C[C[C[C[C[C[C[C[C
+pod/pod-from-node-selector-7 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls -ltr 
+total 52
+-rw-r--r--. 1 root root   213 Nov 16 19:28 pod.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:29 pod1.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:30 pod2.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:30 pod3.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:33 pod4.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:34 pod5.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:34 pod6.yml
+-rw-r--r--. 1 root root 20480 Nov 16 19:34 Scheduling_lab
+-rw-r--r--. 1 root root   212 Nov 16 19:35 pod7.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# rm -rf pod.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls -ltr 
+total 48
+-rw-r--r--. 1 root root   213 Nov 16 19:29 pod1.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:30 pod2.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:30 pod3.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:33 pod4.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:34 pod5.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:34 pod6.yml
+-rw-r--r--. 1 root root 20480 Nov 16 19:34 Scheduling_lab
+-rw-r--r--. 1 root root   212 Nov 16 19:35 pod7.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# cat pod1.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-from-node-selector-1
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    name: minion1
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod_affinity.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod_affinity.yml" [New File][2;1H[1m[34m~                                                                                                                         [3;1H~                                                                                                                         [4;1H~                                                                                                                         [5;1H~                                                                                                                         [6;1H~                                                                                                                         [7;1H~                                                                                                                         [8;1H~                                                                                                                         [9;1H~                                                                                                                         [10;1H~                                                                                                                         [11;1H~                                                                                                                         [12;1H~                                                                                                                         [13;1H~                                                                                                                         [14;1H~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h[?25l[m[16;1H[1m-- INSERT --[m[16;13H[K[1;1H[?12l[?25h[?25lapiVersion: v1
+kind: Pod[2;10H[K[3;1Hmetadata:[3;10H[K[4;1H[K[4;1H[?12l[?25h[?25l  name: pod-with-node-affinity
+spec:[5;6H[K[6;1H  affinity:[6;12H[K[7;1H    nodeAffinity:[7;18H[K[8;1H[K[8;1H[?12l[?25h[?25l[1;1H            values:
+            - minion1
+         
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:[8;11H- key: name
+            operator: In[9;25H[K[10;1H            values:[10;20H[K[11;1H            - minion2[11;22H[K[12;1H  containers:[12;14H[K[13;1H  - name: nginx[13;16H[K[14;1H    image: nginx[14;17H[K[15;1H    imagePullPolicy: IfNotPresent[15;34H[K[15;34H[?12l[?25h[16;1H[K[15;33H[?25l[?12l[?25h[?25l
+:[?12l[?25hwq![?25l"pod_affinity.yml" [New] 27L, 604C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod_affinity.yml[7Pcat pod1.ymlvi pod_affinity.yml[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kkubectl create -f pod_affinity.yml
+pod/pod-with-node-affinity created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod_affinity.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod_affinity.yml" 27L, 604C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-node-affinity
+spec:
+  affinity:
+    nodeAffinity:[8;7HrequiredDuringSchedulingIgnoredDuringExecution:[9;9HnodeSelectorTerms:[10;9H- matchExpressions:[11;11H- key: name[12;13Hoperator: In[13;13Hvalues:[14;13H- minion1[1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+
+
+[?25l[16;1H[K[16;1H:[?12l[?25hq![?25l[16;1H[K[16;1H[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# cp pod_affinity.yml pod_affinity.yml_.ymle.ymlr.ymlo.yml[1P.ymlr.ymlo.ymlr.yml_.yml0.yml[1P.ymlo.ymln.yml_.ymlr.ymle.ymlq.ymlu.ymli.ymlr.ymle.ymld.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod_affinity_error_on_required.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod_affinity_error_on_required.yml" 27L, 604C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-node-affinity
+spec:
+  affinity:
+    nodeAffinity:[8;7HrequiredDuringSchedulingIgnoredDuringExecution:[9;9HnodeSelectorTerms:[10;9H- matchExpressions:[11;11H- key: name[12;13Hoperator: In[13;13Hvalues:[14;13H- minion1[1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+
+
+            valu[14;17Hn[?25l
+
+[1m-- INSERT --[m[16;13H[K[14;18H[?12l[?25h[?25luion1[?12l[?25h[16;1H[K[14;18H[?25l[?12l[?25h[?25l
+
+:[?12l[?25hwq![?25l"pod_affinity_error_on_required.yml" 27L, 605C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubevi pod_affinity_error_on_required.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod_affinity_error_on_required.yml" 27L, 605C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-node-affinity
+spec:
+  affinity:
+    nodeAffinity:[8;7HrequiredDuringSchedulingIgnoredDuringExecution:[9;9HnodeSelectorTerms:[10;9H- matchExpressions:[11;11H- key: name[12;13Hoperator: In[13;13Hvalues:[14;13H- minuion1[1;1H[?12l[?25h
+
+
+  name: pod-with-node-affinit[?25l[16;1H[1m-- INSERT --[m[16;13H[K[4;30H[?12l[?25hy[?25l-[?12l[?25h[?25le[?12l[?25h[?25lr[?12l[?25h[?25lr[?12l[?25h[?25lo[?12l[?25h[?25lr[?12l[?25h[16;1H[K[4;36H[?25l[?12l[?25h[?25l[16;1H:[?12l[?25hWq![?25l[1m[37m[41mE492: Not an editor command: Wq![4;36H[?12l[?25h[?25l[m[16;1H[K[16;1H:[?12l[?25hwq![?25l"pod_affinity_error_on_required.yml" 27L, 611C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl get create -f pod_affinity_error_on_required.yml
+error: when paths, URLs, or stdin is provided as input, you may not specify resource arguments as well
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl get create -f pod_affinity_error_on_required.yml[C[C[1P[1P[1P[1P
+pod/pod-with-node-affinity-error created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# cp pod_affinity_error_on_required.yml[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kpod_affinity.yml pod_affinity.yml-.yml^C
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod_affinity.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod_affinity.yml" 27L, 604C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-node-affinity
+spec:
+  affinity:
+    nodeAffinity:[8;7HrequiredDuringSchedulingIgnoredDuringExecution:[9;9HnodeSelectorTerms:[10;9H- matchExpressions:[11;11H- key: name[12;13Hoperator: In[13;13Hvalues:[14;13H- minion1[1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+
+
+[12;1H[11;1H[10;1H[9;1H[8;1H[7;1H
+
+
+
+
+
+
+
+[?25l[1;15r[15;1H
+[1;16r[15;7HpreferredDuringSchedulingIgnoredDuringExecution:[16;1H[K[15;1H[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;7H- weight: 1[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;9Hpreference:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;11HmatchExpressions:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;11H- key: name[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;13Hoperator: In[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;13Hvalues:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;13H- minion2[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;3Hcontainers:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;3H- name: nginx[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;5Himage: nginx[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;5HimagePullPolicy: IfNotPresent[?12l[?25h[14;1H[13;1H[12;1H[11;1H[10;1H[9;1H[8;1H[7;1H[6;1H[5;1H[4;1H[3;1H[2;1H[1;1H[?25l[1;15r[1;1H[L[1;16r[1;13Hoperator: In[?12l[?25h[?25l[1;15r[1;1H[L[1;16r[1;11H- key: name[?12l[?25h[?25l[1;15r[1;1H[L[1;16r[1;9H- matchExpressions:[?12l[?25h[?25l[1;15r[1;1H[L[1;16r[1;9HnodeSelectorTerms:[?12l[?25h[?25l[1;15r[1;1H[L[1;16r[1;7HrequiredDuringSchedulingIgnoredDuringExecution:[?12l[?25h[?25l[1;15r[1;1H[L[1;16r[1;5HnodeAffinity:[?12l[?25h[?25l[1;15r[1;1H[L[1;16r[1;3Haffinity:[?12l[?25h[?25l[1;15r[1;1H[L[1;16r[1;1Hspec:[?12l[?25h[?25l[1;15r[1;1H[L[1;16r[1;3Hname: pod-with-node-affinity[?12l[?25h
+
+
+
+       [?25l[16;1H[1m-- INSERT --[5;7H[?12l[?25h[?25l[m#requiredDuringSchedulingIgnoredDuringExecution:[5;8H[?12l[?25h[6;8H[?25l# nodeSelectorTerms:[6;9H[?12l[?25h[7;9H[?25l#- matchExpressions:[7;10H[?12l[?25h[8;10H[?25l# - key: name[8;11H[?12l[?25h[9;11H[?25l#  operator: In[9;12H[?12l[?25h[10;12H[?25l# values:[10;13H[?12l[?25h[11;13H [?25l#- minion1[11;14H[?12l[?25h[16;1H[K[11;13H[?25l[?12l[?25h[?25l[16;1H:[?12l[?25hwq![?25l"pod_affinity.yml" 27L, 611C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod_affinity.ymlkubectl create -f pod_affinity_error_on_required.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[33Pvi pod_affinity.yml[Kvi pod_affinity.yml pod_affinity.yml_.ymln.ymlo.yml_.ymlr.ymle.ymlq.ymlu.ymli.ymlr.ymle.ymld.yml[1P[1P[1P[1@c[C[1@p[1@ 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod_affinity.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod_affinity.yml" 27L, 611C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-node-affinity
+spec:
+  affinity:
+    nodeAffinity:[8;7H#requiredDuringSchedulingIgnoredDuringExecution:[9;8H# nodeSelectorTerms:[10;9H#- matchExpressions:[11;10H# - key: name[12;11H#  operator: In[13;12H# values:[14;13H#- minion1[1;1H[?12l[?25h
+
+
+
+
+
+
+      [?25l[16;1H[1m-- INSERT --[m[16;13H[K[8;7H[?12l[?25h[?25lx#requiredDuringSchedulingIgnoredDuringExecution:[8;8H[?12l[?25h[?25l#requiredDuringSchedulingIgnoredDuringExecution:[8;55H[K[8;7H[?12l[?25h[?25lrequiredDuringSchedulingIgnoredDuringExecution:[8;54H[K[8;7H[?12l[?25h[9;7H [?25l nodeSelectorTerms:[9;27H[K[9;8H[?12l[?25h[10;8H [?25l- matchExpressions:[10;28H[K[10;9H[?12l[?25h[?25l - matchExpressions:[10;10H[?12l[?25h[11;10H[?25l - key: name[11;22H[K[11;10H[?12l[?25h[?25l  - key: name[11;11H[?12l[?25h[12;11H[?25l  operator: In[12;25H[K[12;11H[?12l[?25h[?25l   operator: In[12;12H[?12l[?25h[13;12H[?25l values:[13;20H[K[13;12H[?12l[?25h[?25l  values:[13;13H[?12l[?25h[14;13H[?25l- minion1[14;22H[K[14;13H[?12l[?25h[?25l - minion1[14;14H[?12l[?25h[?25l - minion1[14;15H[?12l[?25h[16;1H[K[14;14H[?25l[?12l[?25h[?25l
+
+:[?12l[?25hWq![?25l[16;1H[K[14;14H[?12l[?25h[?25l
+
+:[?12l[?25hwq![?25l"pod_affinity.yml" 27L, 610C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod_affinity_no_required.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod_affinity_no_required.yml" 27L, 611C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-node-affinity
+spec:
+  affinity:
+    nodeAffinity:[8;7H#requiredDuringSchedulingIgnoredDuringExecution:[9;8H# nodeSelectorTerms:[10;9H#- matchExpressions:[11;10H# - key: name[12;11H#  operator: In[13;12H# values:[14;13H#- minion1[1;1H[?12l[?25h
+
+
+  name: pod-with-node-affinit[?25l[16;1H[1m-- INSERT --[m[16;13H[K[4;30H[?12l[?25hy[?25l-[?12l[?25h[?25l1[?12l[?25h[?25l[4;32H[K[4;32H[?12l[?25h[?25lo[?12l[?25h[?25ln[?12l[?25h[?25l-[?12l[?25h[?25lp[?12l[?25h[?25lr[?12l[?25h[?25le[?12l[?25h[?25lf[?12l[?25h[?25le[?12l[?25h[?25lr[?12l[?25h[16;1H[K[4;40H[?25l[?12l[?25h[?25l[16;1H:[?12l[?25hwq![?25l"pod_affinity_no_required.yml" 27L, 621C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod_affinity_no_required.yml
+pod/pod-with-node-affinity-on-prefer created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl delete pods --all
+pod "pod-from-node-selector-1" deleted
+pod "pod-from-node-selector-2" deleted
+pod "pod-from-node-selector-3" deleted
+pod "pod-from-node-selector-4" deleted
+pod "pod-from-node-selector-5" deleted
+pod "pod-from-node-selector-6" deleted
+pod "pod-from-node-selector-7" deleted
+pod "pod-with-node-affinity" deleted
+pod "pod-with-node-affinity-error" deleted
+pod "pod-with-node-affinity-on-prefer" deleted
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls -ltr 
+total 76
+-rw-r--r--. 1 root root   213 Nov 16 19:29 pod1.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:30 pod2.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:30 pod3.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:33 pod4.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:34 pod5.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:34 pod6.yml
+-rw-r--r--. 1 root root   212 Nov 16 19:35 pod7.yml
+-rw-r--r--. 1 root root   611 Nov 16 19:49 pod_affinity_error_on_required.yml
+-rw-r--r--. 1 root root   610 Nov 16 19:52 pod_affinity.yml
+-rw-r--r--. 1 root root 36864 Nov 16 19:53 Scheduling_lab
+-rw-r--r--. 1 root root   621 Nov 16 19:53 pod_affinity_no_required.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls -ltr kubectl delete pods --allcreate -f pod_affinity_no_required.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.yml[K[1Ppod_affinity.yml[1Ppod_affinity.yml[1Ppod_affinity.ymlkpod_affinity.ymlupod_affinity.ymlbpod_affinity.ymlepod_affinity.ymlcpod_affinity.ymltpod_affinity.ymllpod_affinity.yml pod_affinity.ymlcpod_affinity.ymlrpod_affinity.ymlepod_affinity.ymlapod_affinity.ymltpod_affinity.ymlepod_affinity.yml pod_affinity.yml-pod_affinity.ymlfpod_affinity.yml pod_affinity.yml
+pod/pod-with-node-affinity created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod_affinity.yml[1P[1P[1P[1P[1P[1P[1@d[1@e[1@l[1@e[1@t[1@e[C[1@ 
+pod "pod-with-node-affinity" deleted
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls 
+pod1.yml  pod3.yml  pod5.yml  pod7.yml                            pod_affinity_no_required.yml  Scheduling_lab
+pod2.yml  pod4.yml  pod6.yml  pod_affinity_error_on_required.yml  pod_affinity.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls -ltr 
+total 76
+-rw-r--r--. 1 root root   213 Nov 16 19:29 pod1.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:30 pod2.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:30 pod3.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:33 pod4.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:34 pod5.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:34 pod6.yml
+-rw-r--r--. 1 root root   212 Nov 16 19:35 pod7.yml
+-rw-r--r--. 1 root root   611 Nov 16 19:49 pod_affinity_error_on_required.yml
+-rw-r--r--. 1 root root   610 Nov 16 19:52 pod_affinity.yml
+-rw-r--r--. 1 root root 36864 Nov 16 19:53 Scheduling_lab
+-rw-r--r--. 1 root root   621 Nov 16 19:53 pod_affinity_no_required.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod1.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod1.yml" 13L, 213C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-from-node-selector-1
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    name: minion1
+[1m[34m~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+
+
+[?25l[m[16;1H[K[16;1H:[?12l[?25hq![?25l[16;1H[K[16;1H[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod_affinity.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod_affinity.yml" 27L, 610C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-node-affinity
+spec:
+  affinity:
+    nodeAffinity:[8;7HrequiredDuringSchedulingIgnoredDuringExecution:[9;9HnodeSelectorTerms:[10;10H- matchExpressions:[11;12H- key: name[12;14Hoperator: In[13;14Hvalues:[14;15H- minion1[1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+
+
+
+
+[?25l[1;15r[15;1H
+[1;16r[15;7HpreferredDuringSchedulingIgnoredDuringExecution:[16;1H[K[15;1H[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;7H- weight: 1[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;9Hpreference:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;11HmatchExpressions:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;11H- key: name[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;13Hoperator: In[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;13Hvalues:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;13H- minion2[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;3Hcontainers:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;3H- name: nginx[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;5Himage: nginx[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;5HimagePullPolicy: IfNotPresent[?12l[?25h[?25l
+:[?12l[?25hq![?25l[16;1H[K[16;1H[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi pod_affinity_anit[K[Ktiaffinity.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"pod_affinity_antiaffinity.yml" [New File][2;1H[1m[34m~                                                                                                                         [3;1H~                                                                                                                         [4;1H~                                                                                                                         [5;1H~                                                                                                                         [6;1H~                                                                                                                         [7;1H~                                                                                                                         [8;1H~                                                                                                                         [9;1H~                                                                                                                         [10;1H~                                                                                                                         [11;1H~                                                                                                                         [12;1H~                                                                                                                         [13;1H~                                                                                                                         [14;1H~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h[?25l[m[16;1H[1m-- INSERT --[m[16;13H[K[1;1H[?12l[?25h[?25l    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:[2;55H[K[3;1H      - weight: 100[3;20H[K[4;1H        podAffinityTerm:[4;25H[K[5;1H          labelSelector:[5;25H[K[6;1H            matchExpressions:[6;30H[K[7;1H            - key: name[7;24H[K[8;1H              operator: In[8;27H[K[9;1H              values:[9;22H[K[10;1H              - minion1[10;24H[K[11;1H          topologyKey: topology.kubernetes.io/zone[11;51H[K[12;1H  containers:[12;14H[K[13;1H  - name: with-pod-affinity[13;28H[K[14;1H    image: nginx[14;17H[K[15;1H    imagePullPolicy: IfNotPresent[15;34H[K[15;34H[?12l[?25h[16;1H[K[15;33H[?25l[?12l[?25h[?25l
+:[?12l[?25hwq![?25l"pod_affinity_antiaffinity.yml" [New] 30L, 769C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl creare[K[Kr[Kt [K[Ke[Kte -f pod_affinity_antiaffinity.yml
+pod/with-pod-affinity-antiaffinity created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubc[Kectl decribescribe[C[C[C[C[C pod with-pod-affinity-antiaffinity
+Name:         with-pod-affinity-antiaffinity
+Namespace:    default
+Priority:     0
+Node:         <none>
+Labels:       <none>
+Annotations:  kubernetes.io/limit-ranger:
+                LimitRanger plugin set: memory request for container with-pod-affinity; memory limit for container with-pod-affinity
+Status:       Pending
+IP:           
+IPs:          <none>
+Containers:
+  with-pod-affinity:
+    Image:      nginx
+    Port:       <none>
+    Host Port:  <none>
+    Limits:
+      memory:  256Mi
+    Requests:
+      memory:     128Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-mq4ll (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False 
+Volumes:
+  kube-api-access-mq4ll:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  32s   default-scheduler  0/3 nodes are available: 1 node(s) had taint {node-role.kubernetes.io/master: }, that the pod didn't tolerate, 2 node(s) didn't match pod affinity rules.
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls- ltr 
+bash: ls-: command not found
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls -ltr 
+total 88
+-rw-r--r--. 1 root root   213 Nov 16 19:29 pod1.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:30 pod2.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:30 pod3.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:33 pod4.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:34 pod5.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:34 pod6.yml
+-rw-r--r--. 1 root root   212 Nov 16 19:35 pod7.yml
+-rw-r--r--. 1 root root   611 Nov 16 19:49 pod_affinity_error_on_required.yml
+-rw-r--r--. 1 root root   610 Nov 16 19:52 pod_affinity.yml
+-rw-r--r--. 1 root root   621 Nov 16 19:53 pod_affinity_no_required.yml
+-rw-r--r--. 1 root root 45056 Nov 16 20:07 Scheduling_lab
+-rw-r--r--. 1 root root   769 Nov 16 20:07 pod_affinity_antiaffinity.yml
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls -ltr - [C[C[C[Ckubectl describe pod with-pod-affinity-antiaffinity[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Pcreate -f pod_affinity_antiaffinity.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml[1P.yml1.yml
+pod/pod-from-node-selector-1 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod1.yml[1P.yml2.yml
+pod/pod-from-node-selector-2 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod2.yml[1P.yml3.yml
+pod/pod-from-node-selector-3 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod3.yml[1P.yml4.yml
+pod/pod-from-node-selector-4 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod4.yml[1P.yml5.yml
+pod/pod-from-node-selector-5 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod5.yml[1P.yml6.yml
+pod/pod-from-node-selector-6 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod6.yml[1P.yml7.yml
+pod/pod-from-node-selector-7 created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls -ltr 
+total 92
+-rw-r--r--. 1 root root   213 Nov 16 19:29 pod1.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:30 pod2.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:30 pod3.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:33 pod4.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:34 pod5.yml
+-rw-r--r--. 1 root root   213 Nov 16 19:34 pod6.yml
+-rw-r--r--. 1 root root   212 Nov 16 19:35 pod7.yml
+-rw-r--r--. 1 root root   611 Nov 16 19:49 pod_affinity_error_on_required.yml
+-rw-r--r--. 1 root root   610 Nov 16 19:52 pod_affinity.yml
+-rw-r--r--. 1 root root   621 Nov 16 19:53 pod_affinity_no_required.yml
+-rw-r--r--. 1 root root   769 Nov 16 20:07 pod_affinity_antiaffinity.yml
+-rw-r--r--. 1 root root 49152 Nov 16 20:10 Scheduling_lab
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# ls -ltr kubectl create -f pod7.yml[K[K[K[K[K[K[K[Kpod_affinity_error_on_required.yml
+pod/pod-with-node-affinity-error created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod_affinity_error_on_required.yml[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kpod_affinity.yml
+pod/pod-with-node-affinity created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl create -f pod_affinity.yml[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kpod_affinity_no_required.yml
+pod/pod-with-node-affinity-on-prefer created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi test-pending [K.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"test-pending.yml" [New File][2;1H[1m[34m~                                                                                                                         [3;1H~                                                                                                                         [4;1H~                                                                                                                         [5;1H~                                                                                                                         [6;1H~                                                                                                                         [7;1H~                                                                                                                         [8;1H~                                                                                                                         [9;1H~                                                                                                                         [10;1H~                                                                                                                         [11;1H~                                                                                                                         [12;1H~                                                                                                                         [13;1H~                                                                                                                         [14;1H~                                                                                                                         [15;1H~                                                                                                                         [1;1H[?12l[?25h[?25l[m[16;1H[1m-- INSERT --[m[16;13H[K[1;1H[?12l[?25h[?25lapiVersion: v1
+kind: Pod[2;10H[K[3;1Hmetadata:[3;10H[K[4;1H  name: with-pod-affinity-anti-affinity[4;40H[K[5;1Hspec:[5;6H[K[6;1H[K[6;1H[?12l[?25h[?25l[1;1H    #podAntiAffinity:
+      #preferredDuringSchedulingIgnoredDuringExecution:
+      #- weight: 100
+        #podAffinityTerm:[4;26H[K[5;1H          #labelSelector:[6;13H#matchExpressions:
+            #- key: name[7;25H[K[8;1H              #operator: In[8;28H[K[9;1H              #values:[9;23H[K[10;1H              #- minion1[10;25H[K[11;1H          #topologyKey: topology.kubernetes.io/zone[11;52H[K[12;1H  containers:[12;14H[K[13;1H  - name: with-pod-affinity[13;28H[K[14;1H    image: nginx[14;17H[K[15;1H    imagePullPolicy: IfNotPresent[15;34H[K[15;34H[?12l[?25h[16;1H[K[15;33H[?25l[?12l[?25h[?25l
+:[?12l[?25hwq![?25l"test-pending.yml" [New] 30L, 781C written
+[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi test-pending.ymlkubectl create -f pod_affinity_no_required.yml[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Ktest-pending.yml
+pod/with-pod-affinity-anti-affinity created
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# vi test-pending.yml
+[?1049h[?1h=[1;16r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[16;1H"test-pending.yml" 30L, 781C[1;1HapiVersion: v1
+kind: Pod
+metadata:
+  name: with-pod-affinity-anti-affinity
+spec:
+  affinity:
+    podAffinity:[8;7HrequiredDuringSchedulingIgnoredDuringExecution:[9;7H- labelSelector:[10;11HmatchExpressions:[11;11H- key: name[12;13Hoperator: In[13;13Hvalues:[14;13H- minion2[15;9HtopologyKey: topology.kubernetes.io/zone[1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+
+
+
+
+
+[?25l[1;15r[15;1H
+[1;16r[15;5H#podAntiAffinity:[16;1H[K[15;1H[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;7H#preferredDuringSchedulingIgnoredDuringExecution:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;7H#- weight: 100[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;9H#podAffinityTerm:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;11H#labelSelector:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;13H#matchExpressions:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;13H#- key: name[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;15H#operator: In[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;15H#values:[?12l[?25h[?25l[1;15r[15;1H
+[1;16r[15;15H#- minion1[?12l[?25h[?25l
+:[?12l[?25hq![?25l[16;1H[K[16;1H[?1l>[?12l[?25h[?1049l]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl describe pods with-pod-affinity-anti-affinity
+Name:         with-pod-affinity-anti-affinity
+Namespace:    default
+Priority:     0
+Node:         <none>
+Labels:       <none>
+Annotations:  kubernetes.io/limit-ranger:
+                LimitRanger plugin set: memory request for container with-pod-affinity; memory limit for container with-pod-affinity
+Status:       Pending
+IP:           
+IPs:          <none>
+Containers:
+  with-pod-affinity:
+    Image:      nginx
+    Port:       <none>
+    Host Port:  <none>
+    Limits:
+      memory:  256Mi
+    Requests:
+      memory:     128Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-86qvm (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False 
+Volumes:
+  kube-api-access-86qvm:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  67s   default-scheduler  0/3 nodes are available: 1 node(s) had taint {node-role.kubernetes.io/master: }, that the pod didn't tolerate, 2 node(s) didn't match pod affinity rules.
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# 
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# kubectl describe pods with-pod-affinity-anti-affinity[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[34Pvi test-pending.yml[15@kubectl create -f[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ckubectl create -f pod_affinity_no_required.yml.yml[K_error_on_required.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [Kkubectl create -f pod7.yml6.yml5.yml4.yml3.yml2.yml1.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -ltr [K- [C[C[C[Ckubectl describe pod with-pod-affinity-antiaffinity[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Pcreate -f pod_affinity_antiaffinity.yml[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[15Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.yml[K[8P1.yml[3Pls -ltr [Kkubectl delete  -f pod_affinity.yml[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kpods --all
+pod "pod-from-node-selector-1" deleted
+pod "pod-from-node-selector-2" deleted
+pod "pod-from-node-selector-3" deleted
+pod "pod-from-node-selector-4" deleted
+pod "pod-from-node-selector-5" deleted
+pod "pod-from-node-selector-6" deleted
+pod "pod-from-node-selector-7" deleted
+pod "pod-with-node-affinity" deleted
+pod "pod-with-node-affinity-error" deleted
+pod "pod-with-node-affinity-on-prefer" deleted
+pod "with-pod-affinity-anti-affinity" deleted
+pod "with-pod-affinity-antiaffinity" deleted
+]0;root@Gru:~/Kubernetes/Scheduling[root@Gru Scheduling]# exit
+exit
+
+Script done on Tue 16 Nov 2021 08:19:08 PM EST

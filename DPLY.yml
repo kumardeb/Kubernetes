@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: dply
+  labels:
+    app: guestbook
+    tier: frontend
+  annotations:
+    kubernetes.io/change-cause: "Deployment with nginx version 1.21" 
+spec:
+  # modify replicas according to your case
+  replicas: 6 
+  minReadySeconds: 15
+  selector:
+    matchLabels:
+    # tier: frontend
+    # tier: dev
+      env: prod
+  strategy:                   
+    rollingUpdate:           
+        maxSurge: 2
+      # maxSurge: 2         
+        maxUnavailable: 3 
+      # maxUnavailable: 3   
+    type: RollingUpdate
+   #type: Recreate               
+  template:
+    metadata:
+      labels:
+       #tier: frontend
+       #tier: dev
+        env: prod 
+    spec:
+      containers:
+      - name: nginx-server 
+        image: nginx:1
+        #image: nginx:1
+        resources:
+         requests:
+           memory: 100Mi 
+         limits:
+           memory: 200Mi 
